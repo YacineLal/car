@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="login">
+  <div>
+    <form [formGroup]="loginForm">
+      <ion-item>
+        <ion-input
+          label="Email"
+          labelPlacement="stacked"
+          placeholder="email@example.com"
+          formControlName="email"
+          class="input-field"
+        >
+        </ion-input>
+      </ion-item>
+      <div *ngIf="loginForm.get('email')?.dirty">
+        <span *ngIf="loginForm.get('email')?.errors?.['required']" class="span-error">This field is required</span>
+        <span *ngIf="loginForm.get('email')?.errors?.['email']" class="span-error">Invalid email</span>
+      </div>
+
+      <ion-item>
+        <ion-input
+          label="Password"
+          labelPlacement="stacked"
+          [type]="passwordType"
+          placeholder="***********"
+          formControlName="password"
+          class="input-field"
+        >
+        </ion-input>
+        <ion-icon id="icon-eye" [name]="passwordIcon" (click)="onToggleShowPassword()"></ion-icon>
+      </ion-item>
+      <div *ngIf="loginForm.get('password')?.dirty">
+        <span *ngIf="loginForm.get('password')?.errors?.['required']" class="span-error">This field is required</span>
+        <span *ngIf="loginForm.get('password')?.errors?.['minlength']" class="span-error">Minimum 8 characters required</span>
+      </div>
+
+      <div class="container-button">
+        <ion-button size="medium" [disabled]="loginForm.invalid" (click)="onLogin()">
+          Login
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

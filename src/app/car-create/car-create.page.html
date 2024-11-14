@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Créer une voiture</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Marque</ion-label>
+      <ion-input formControlName="brand"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Modèle</ion-label>
+      <ion-input formControlName="model"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Plaque d’immatriculation</ion-label>
+      <ion-input formControlName="licensePlate"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Photo avant</ion-label>
+      <ion-input type="file" formControlName="frontPhoto"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Photo arrière</ion-label>
+      <ion-input type="file" formControlName="rearPhoto"></ion-input>
+    </ion-item>
+    <ion-button expand="full" type="submit" [disabled]="carForm.invalid">Créer</ion-button>
+  </form>
+</ion-content>

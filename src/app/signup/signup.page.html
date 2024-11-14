@@ -1,0 +1,95 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="signup">
+  <div>
+    <form [formGroup]="signupForm">
+      <ion-item>
+        <ion-input
+          label="Username"
+          labelPlacement="stacked"
+          placeholder="John Doe"
+          formControlName="username"
+          class="input-field"
+        >
+        </ion-input>
+      </ion-item>
+      <div *ngIf="signupForm.get('username')?.dirty">
+        <span *ngIf="signupForm.get('username')?.errors?.['required']" class="span-error">This field is required</span>
+        <span *ngIf="signupForm.get('username')?.errors?.['minlength']" class="span-error">Minimum 2 characters required</span>
+      </div>
+
+      <ion-item>
+        <ion-input
+          label="Email"
+          labelPlacement="stacked"
+          placeholder="email@example.com"
+          formControlName="email"
+          class="input-field"
+        >
+        </ion-input>
+      </ion-item>
+      <div *ngIf="signupForm.get('email')?.dirty">
+        <span *ngIf="signupForm.get('email')?.errors?.['required']" class="span-error">This field is required</span>
+        <span *ngIf="signupForm.get('email')?.errors?.['email']" class="span-error">Invalid email</span>
+      </div>
+
+      <ion-item>
+        <ion-input
+          label="Phone Number"
+          labelPlacement="stacked"
+          placeholder="0123456789"
+          formControlName="phoneNumber"
+          class="input-field"
+        >
+        </ion-input>
+      </ion-item>
+      <div *ngIf="signupForm.get('phoneNumber')?.dirty">
+        <span *ngIf="signupForm.get('phoneNumber')?.errors?.['required']" class="span-error">This field is required</span>
+        <span *ngIf="signupForm.get('phoneNumber')?.errors?.['pattern']" class="span-error">Invalid phone number</span>
+      </div>
+
+      <ion-item>
+        <ion-input
+          label="Password"
+          labelPlacement="stacked"
+          [type]="passwordType"
+          placeholder="***********"
+          formControlName="password"
+          class="input-field"
+        >
+        </ion-input>
+        <ion-icon id="icon-eye" [name]="passwordIcon" (click)="onToggleShowPassword()"></ion-icon>
+      </ion-item>
+      <div *ngIf="signupForm.get('password')?.dirty">
+        <span *ngIf="signupForm.get('password')?.errors?.['required']" class="span-error">This field is required</span>
+        <span *ngIf="signupForm.get('password')?.errors?.['minlength']" class="span-error">Minimum 8 characters required</span>
+      </div>
+
+      <ion-item>
+        <ion-input
+          label="Confirm Password"
+          labelPlacement="stacked"
+          [type]="passwordType"
+          placeholder="***********"
+          formControlName="confirmPassword"
+          class="input-field"
+        >
+        </ion-input>
+      </ion-item>
+      <div *ngIf="signupForm.get('confirmPassword')?.dirty || signupForm.get('confirmPassword')?.touched || signupForm.hasError('mismatch')">
+        <span *ngIf="signupForm.get('confirmPassword')?.errors?.['required']" class="span-error">This field is required</span>
+        <span *ngIf="signupForm.hasError('mismatch')" class="span-error">Passwords do not match</span>
+      </div>
+
+      <div class="container-button">
+        <ion-button size="medium" [disabled]="signupForm.invalid" (click)="onSignUp()">
+          Signup
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>
