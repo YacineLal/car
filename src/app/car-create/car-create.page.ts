@@ -32,23 +32,35 @@ export class CarCreatePage implements OnInit {
     // Initialization logic here
   }
 
-  public onSubmit(): void {
+  public async onSubmit(): Promise<void> {
     if (this.carForm.valid) {
-      const car: Car = {
-        brand: this.carForm.value.brand as string,
-        model: this.carForm.value.model as string,
-        licensePlate: this.carForm.value.licensePlate as string,
-        frontPhoto: this.carForm.value.frontPhoto as string,
-        rearPhoto: this.carForm.value.rearPhoto as string,
-      };
-      this.carService.addCarToDatabase(car)
-        .then(() => {
-          console.log('Car added:', car);
-          this.carForm.reset();
-        })
-        .catch((error) => {
-          console.error('Error adding car:', error);
-        });
+      const frontPhotoInput = document.getElementById('frontPhoto') as HTMLInputElement;
+      const rearPhotoInput = document.getElementById('rearPhoto') as HTMLInputElement;
+
+      if (frontPhotoInput.files && rearPhotoInput.files) {
+        const frontPhotoFile = frontPhotoInput.files[0];
+        const rearPhotoFile = rearPhotoInput.files[0];
+
+        const frontPhotoUrl = await this.carService.uploadFile(frontPhotoFile, `cars/${frontPhotoFile.name}`);
+        const rearPhotoUrl = await this.carService.uploadFile(rearPhotoFile, `cars/${rearPhotoFile.name}`);
+
+        const car: Car = {
+          brand: this.carForm.value.brand as string,
+          model: this.carForm.value.model as string,
+          licensePlate: this.carForm.value.licensePlate as string,
+          frontPhoto: frontPhotoUrl,
+          rearPhoto: rearPhotoUrl,
+        };
+
+        this.carService.addCarToDatabase(car)
+          .then(() => {
+            console.log('Car added:', car);
+            this.carForm.reset();
+          })
+          .catch((error) => {
+            console.error('Error adding car:', error);
+          });
+      }
     }
   }
 }
