@@ -32,6 +32,15 @@ export class CarCreatePage implements OnInit {
     // Initialization logic here
   }
 
+  private async fileToBase64(file: File): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+    });
+  }
+
   public async onSubmit(): Promise<void> {
     if (this.carForm.valid) {
       const frontPhotoInput = document.getElementById('frontPhoto') as HTMLInputElement;
@@ -41,15 +50,15 @@ export class CarCreatePage implements OnInit {
         const frontPhotoFile = frontPhotoInput.files[0];
         const rearPhotoFile = rearPhotoInput.files[0];
 
-        const frontPhotoUrl = await this.carService.uploadFile(frontPhotoFile, `cars/${frontPhotoFile.name}`);
-        const rearPhotoUrl = await this.carService.uploadFile(rearPhotoFile, `cars/${rearPhotoFile.name}`);
+        const frontPhotoBase64 = await this.fileToBase64(frontPhotoFile);
+        const rearPhotoBase64 = await this.fileToBase64(rearPhotoFile);
 
         const car: Car = {
           brand: this.carForm.value.brand as string,
           model: this.carForm.value.model as string,
           licensePlate: this.carForm.value.licensePlate as string,
-          frontPhoto: frontPhotoUrl,
-          rearPhoto: rearPhotoUrl,
+          frontPhoto: frontPhotoBase64,
+          rearPhoto: rearPhotoBase64,
         };
 
         this.carService.addCarToDatabase(car)

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { initializeApp } from 'firebase/app';
 import { Car } from '../../models/car.model';
 
@@ -16,19 +15,12 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const storage = getStorage(app);
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarService {
   constructor() {}
-
-  async uploadFile(file: File, path: string): Promise<string> {
-    const storageRef = ref(storage, path);
-    await uploadBytes(storageRef, file);
-    return getDownloadURL(storageRef);
-  }
 
   async addCarToDatabase(car: Car): Promise<void> {
     try {
