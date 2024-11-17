@@ -12,12 +12,12 @@
   </ion-header>
 
   <ion-list>
-    <ion-item *ngFor="let car of cars">
+    <ion-item *ngFor="let car of cars" (click)="viewCarDetail(car.id)">
       <ion-label>
-        <h2>{{ car.brand }} {{ car.model }}</h2>
-        <p>License Plate: {{ car.licensePlate }}</p>
-        <img [src]="car.frontPhoto" alt="Front Photo" class="car-photo" />
-        <img [src]="car.rearPhoto" alt="Rear Photo" class="car-photo" />
+        <h2>{{ car.data.brand }} {{ car.data.model }}</h2>
+        <p>License Plate: {{ car.data.licensePlate }}</p>
+        <ion-img [src]="car.data.frontPhoto" alt="Front Photo" class="car-photo"></ion-img>
+        <ion-img [src]="car.data.rearPhoto" alt="Rear Photo" class="car-photo"></ion-img>
       </ion-label>
     </ion-item>
   </ion-list>

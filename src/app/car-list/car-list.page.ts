@@ -1,7 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {IonContent, IonHeader, IonItem, IonLabel, IonList, IonTitle, IonToolbar} from '@ionic/angular/standalone';
+import {
+  IonContent,
+  IonHeader,
+  IonImg,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonTitle,
+  IonToolbar
+} from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
 import { CarService } from '../core/services/car.service';
 import { Car } from '../models/car.model';
 
@@ -10,12 +20,12 @@ import { Car } from '../models/car.model';
   templateUrl: './car-list.page.html',
   styleUrls: ['./car-list.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonLabel]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonLabel, IonImg]
 })
 export class CarListPage implements OnInit {
-  public cars: Car[] = [];
+  public cars: { id: string, data: Car }[] = [];
 
-  constructor(private carService: CarService) { }
+  constructor(private carService: CarService, private router: Router) { }
 
   ngOnInit() {
     this.loadCars();
@@ -27,5 +37,9 @@ export class CarListPage implements OnInit {
     } catch (error) {
       console.error('Error fetching cars:', error);
     }
+  }
+
+  public viewCarDetail(carId: string) {
+    this.router.navigate(['/car-detail', carId]);
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs, doc, setDoc, deleteDoc, getDoc } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import { Car } from '../../models/car.model';
 
@@ -31,9 +31,40 @@ export class CarService {
     }
   }
 
-  async getCarsFromDatabase(): Promise<Car[]> {
+  async getCarsFromDatabase(): Promise<{ id: string, data: Car }[]> {
     const carCollection = collection(db, 'car');
     const carSnapshot = await getDocs(carCollection);
-    return carSnapshot.docs.map(doc => doc.data() as Car);
+    return carSnapshot.docs.map(doc => {
+      const car = doc.data() as Car;
+      console.log('Car ID:', doc.id);
+      return { id: doc.id, data: car };
+    });
+  }
+
+  async getCarById(id: string): Promise<{ id: string, data: Car }> {
+    const carDoc = await getDoc(doc(db, 'car', id));
+    if (carDoc.exists()) {
+      return { id: carDoc.id, data: carDoc.data() as Car };
+    } else {
+      throw new Error('Car not found');
+    }
+  }
+
+  async updateCar(id: string, car: Car): Promise<void> {
+    try {
+      await setDoc(doc(db, 'car', id), car);
+      console.log('Document updated with ID: ', id);
+    } catch (e) {
+      console.error('Error updating document: ', e);
+    }
+  }
+
+  async deleteCar(id: string): Promise<void> {
+    try {
+      await deleteDoc(doc(db, 'car', id));
+      console.log('Document deleted with ID: ', id);
+    } catch (e) {
+      console.error('Error deleting document: ', e);
+    }
   }
 }
