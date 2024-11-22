@@ -1,23 +1,27 @@
-<form [formGroup]="carForm" (ngSubmit)="onSubmit()">
-  <ion-item>
-    <ion-label>Brand</ion-label>
-    <ion-input formControlName="brand"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Model</ion-label>
-      <ion-input formControlName="model"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>License Plate</ion-label>
-    <ion-input formControlName="licensePlate"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Front Photo</ion-label>
-    <input type="file" id="frontPhoto" formControlName="frontPhoto">
-  </ion-item>
-  <ion-item>
-    <ion-label>Rear Photo</ion-label>
-    <input type="file" id="rearPhoto" formControlName="rearPhoto">
-  </ion-item>
-  <ion-button type="submit" [disabled]="!carForm.valid">Submit</ion-button>
-</form>
+<ion-content [fullscreen]="true" class="car-create-content">
+  <div class="card">
+    <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label>Brand</ion-label>
+        <ion-input formControlName="brand"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Model</ion-label>
+        <ion-input formControlName="model"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>License Plate</ion-label>
+        <ion-input formControlName="licensePlate"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Front Photo</ion-label>
+        <input type="file" id="frontPhoto" formControlName="frontPhoto">
+      </ion-item>
+      <ion-item>
+        <ion-label>Rear Photo</ion-label>
+        <input type="file" id="rearPhoto" formControlName="rearPhoto">
+      </ion-item>
+      <ion-button type="submit" [disabled]="!carForm.valid">Submit</ion-button>
+    </form>
+  </div>
+</ion-content>

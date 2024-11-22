@@ -1,4 +1,70 @@
+/* General Styling */
+.car-detail-content {
+  --background: #000; /* Black background */
+  display: flex; /* Flexbox for alignment */
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  background-color: var(--background); /* Ensure background applies to full screen */
+  color: #fff; /* White text color */
+  box-sizing: border-box; /* Ensures consistent sizing */
+  padding: 20px; /* Padding around the content */
+}
+
+/* Detail Container Styling */
+.detail-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff; /* White text color inside the container */
+  margin: auto;
+}
+
+/* Info and Images Section */
+.info-section, .images-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* Image Styling */
 .small-img {
-  width: 500px;
+  width: 48%;
   height: auto;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+/* Header Styling */
+ion-header {
+  background: #1a1a1a; /* Slightly lighter black for header background */
+  color: #fff; /* White text color for header */
+}
+
+/* Toolbar Styling */
+ion-toolbar {
+  --background: #1a1a1a; /* Slightly lighter black for toolbar background */
+  color: #fff; /* White text color for toolbar */
+}
+
+/* Title Styling */
+ion-title {
+  color: #fff; /* White text color for title */
+}
+
+/* Button Styling */
+ion-button {
+  --background: #ffcc00; /* Yellow button */
+  --border-radius: 15px;
+  --color: #000; /* Black text */
+  font-size: 18px;
+  width: 100%;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 10px;
 }
