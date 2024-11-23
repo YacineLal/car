@@ -1,96 +1,21 @@
-/* General Styling */
+@import 'src/styles/shared.scss';
+
+/* Specific Styling */
 .login-content {
-  --background: #000; /* Black background */
-  display: flex; /* Flexbox for alignment */
-  justify-content: center; /* Horizontally center */
-  align-items: center; /* Vertically center */
-  height: 100vh; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
-  background-color: var(--background); /* Ensure background applies to full screen */
-  color: #fff; /* White text color */
-  box-sizing: border-box; /* Ensures consistent sizing */
+  @extend .shared-content;
 }
 
-/* Card Styling */
-.card {
-  width: 90%;
-  max-width: 400px;
-  background: #1a1a1a; /* Slightly lighter black for card background */
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  margin: auto;
+.login-content .card {
+  top: 40%;
 }
 
-/* Logo Container */
-.logo-container {
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-}
 
-.logo {
-  width: 150px;
-  height: auto;
-  border-radius: 10px;
-}
-
-/* Input Fields */
-.custom-item {
-  --background: transparent;
-  --border-radius: 10px;
-  --padding-start: 10px;
-  --padding-end: 10px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  font-weight: bold;
-  font-size: 18px;
-
-}
-
-.custom-input {
-  --color: #000; /* Black text */
-  --placeholder-color: #888; /* Gray placeholder */
-  --padding-start: 15px;
-  --padding-top: 10px;
-  --padding-bottom: 10px;
-  font-size: 14px;
-  background: #fff; /* White background for input */
-  color: #000; /* Black text */
-}
 /* Icon Styling */
-ion-icon {
-  color: #fff;
-  font-size: 20px;
+ion-input-password-toggle {
+  --color: #000; /* Black icon */
   position: absolute;
-  right: 20px;
+  right: 5px;
   top: 50%;
   transform: translateY(-50%);
 }
 
-/* Error Message */
-.error-message {
-  color: #ff4d4d; /* Red error text */
-  font-size: 12px;
-  margin-top: -10px;
-  margin-bottom: 10px;
-}
-
-/* Button Styling */
-.button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-ion-button {
-  --background: #ffcc00; /* Yellow button */
-  --border-radius: 15px;
-  --color: #000; /* Black text */
-  font-size: 16px;
-  width: 50%;
-  text-transform: uppercase;
-  font-weight: bold;
-}

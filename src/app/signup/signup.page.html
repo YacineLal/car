@@ -1,24 +1,16 @@
-<ion-header [translucent]="true">
-  <ion-toolbar class="header-toolbar">
-    <ion-title></ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" class="signup-content">
+  <div class="logo-container">
+    <img src="/assets/logo.png" alt="Logo" class="logo" />
+  </div>
   <div class="card">
-    <div class="logo-container">
-      <img src="/assets/car-rental-s5.jpg" alt="Logo" class="logo" />
-    </div>
     <form [formGroup]="signupForm">
       <ion-item class="custom-item">
+        <ion-label>Username</ion-label>
         <ion-input
-          label="Username"
-          labelPlacement="stacked"
           placeholder="Username"
           formControlName="username"
           class="custom-input"
-        >
-        </ion-input>
+        ></ion-input>
       </ion-item>
       <div *ngIf="signupForm.get('username')?.dirty">
         <span *ngIf="signupForm.get('username')?.errors?.['required']" class="error-message">This field is required</span>
@@ -26,14 +18,12 @@
       </div>
 
       <ion-item class="custom-item">
+        <ion-label>Email</ion-label>
         <ion-input
-          label="Email"
-          labelPlacement="stacked"
           placeholder="email@example.com"
           formControlName="email"
           class="custom-input"
-        >
-        </ion-input>
+        ></ion-input>
       </ion-item>
       <div *ngIf="signupForm.get('email')?.dirty">
         <span *ngIf="signupForm.get('email')?.errors?.['required']" class="error-message">This field is required</span>
@@ -41,14 +31,12 @@
       </div>
 
       <ion-item class="custom-item">
+        <ion-label>Phone Number</ion-label>
         <ion-input
-          label="Phone Number"
-          labelPlacement="stacked"
           placeholder="1234567890"
           formControlName="phoneNumber"
           class="custom-input"
-        >
-        </ion-input>
+        ></ion-input>
       </ion-item>
       <div *ngIf="signupForm.get('phoneNumber')?.dirty">
         <span *ngIf="signupForm.get('phoneNumber')?.errors?.['required']" class="error-message">This field is required</span>
@@ -56,16 +44,13 @@
       </div>
 
       <ion-item class="custom-item">
+        <ion-label>Password</ion-label>
         <ion-input
-          label="Password"
-          labelPlacement="stacked"
           [type]="passwordType"
           placeholder="***********"
           formControlName="password"
           class="custom-input"
-        >
-        </ion-input>
-        <ion-icon id="icon-eye" [name]="passwordIcon" (click)="onToggleShowPassword()"></ion-icon>
+        ></ion-input>
       </ion-item>
       <div *ngIf="signupForm.get('password')?.dirty">
         <span *ngIf="signupForm.get('password')?.errors?.['required']" class="error-message">This field is required</span>
@@ -73,15 +58,13 @@
       </div>
 
       <ion-item class="custom-item">
+        <ion-label>Confirm Password</ion-label>
         <ion-input
-          label="Confirm Password"
-          labelPlacement="stacked"
           [type]="passwordType"
           placeholder="***********"
           formControlName="confirmPassword"
           class="custom-input"
-        >
-        </ion-input>
+        ></ion-input>
       </ion-item>
       <div *ngIf="signupForm.get('confirmPassword')?.dirty || signupForm.get('confirmPassword')?.touched || signupForm.hasError('mismatch')">
         <span *ngIf="signupForm.get('confirmPassword')?.errors?.['required']" class="error-message">This field is required</span>
