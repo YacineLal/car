@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from './core/services/authentication.service';
 import { LogoutButtonComponent } from './core/services/logout-button.component';
-import { LoginModalComponent } from './login/login-modal.component';
+import { LoginModalComponent } from '../modals/login-modal.component';
 
 @Component({
   selector: 'app-root',

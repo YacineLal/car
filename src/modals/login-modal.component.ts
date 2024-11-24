@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalService } from '../core/services/modal.service';
+import { ModalService } from '../app/core/services/modal.service';
 import { CommonModule } from '@angular/common'; // Import CommonModule for Angular directives like *ngIf
 
 @Component({
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common'; // Import CommonModule for Angul
       </div>
     </div>
   `,
-  styleUrls: ['login-modal-component.scss'],
+  styleUrls: ['./login-modal-component.scss'],
   standalone: true,
   imports: [CommonModule], // Add CommonModule here
 })
