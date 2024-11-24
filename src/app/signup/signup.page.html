@@ -32,11 +32,11 @@
 
       <ion-item class="custom-item">
         <ion-label>Phone Number</ion-label>
-        <ion-input
-          placeholder="1234567890"
-          formControlName="phoneNumber"
-          class="custom-input"
-        ></ion-input>
+          <ion-input
+            placeholder="1234567890"
+            formControlName="phoneNumber"
+            class="custom-input"
+          ></ion-input>
       </ion-item>
       <div *ngIf="signupForm.get('phoneNumber')?.dirty">
         <span *ngIf="signupForm.get('phoneNumber')?.errors?.['required']" class="error-message">This field is required</span>
@@ -76,6 +76,8 @@
           Signup
         </ion-button>
       </div>
+      <div class="link-container">
+        <span>Don't have an account? <a [routerLink]="'/login'">Login</a></span>      </div>
     </form>
   </div>
 </ion-content>

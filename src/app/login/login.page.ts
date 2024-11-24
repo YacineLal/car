@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router } from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import { AuthenticationService } from '../core/services/authentication.service';
 
 @Component({
@@ -15,6 +15,7 @@ import { AuthenticationService } from '../core/services/authentication.service';
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class LoginPage implements OnInit {

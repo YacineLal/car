@@ -34,10 +34,12 @@
         <span *ngIf="loginForm.get('password')?.errors?.['minlength']" class="error-message">Minimum 8 characters required</span>
       </div>
       <div class="button-container">
-        <ion-button size="large" [disabled]="loginForm.invalid" (click)="onLogin()">
+        <ion-button size="large" (click)="onLogin()">
           Login
         </ion-button>
       </div>
+      <div class="link-container">
+        <span>Don't have an account? <a [routerLink]="'/signup'">Sign up</a></span>      </div>
     </form>
   </div>
 </ion-content>
