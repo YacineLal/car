@@ -1,33 +1,74 @@
 <ion-content [fullscreen]="true" class="car-create-content">
-  <div class="logo-container">
-    <img src="/assets/logo.png" alt="Logo" class="logo" />
-  </div>
   <div class="card">
     <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
       <ion-item class="custom-item">
         <ion-label>Brand</ion-label>
-        <ion-input formControlName="brand" class="custom-input"></ion-input>
+        <ion-input
+          placeholder="Brand"
+          formControlName="brand"
+          class="custom-input"
+        ></ion-input>
       </ion-item>
+      <div *ngIf="carForm.get('brand')?.dirty">
+        <span *ngIf="carForm.get('brand')?.errors?.['required']" class="error-message">This field is required</span>
+      </div>
+
       <ion-item class="custom-item">
         <ion-label>Model</ion-label>
-        <ion-input formControlName="model" class="custom-input"></ion-input>
+        <ion-input
+          placeholder="Model"
+          formControlName="model"
+          class="custom-input"
+        ></ion-input>
       </ion-item>
+      <div *ngIf="carForm.get('model')?.dirty">
+        <span *ngIf="carForm.get('model')?.errors?.['required']" class="error-message">This field is required</span>
+      </div>
+
       <ion-item class="custom-item">
         <ion-label>License Plate</ion-label>
-        <ion-input formControlName="licensePlate" class="custom-input"></ion-input>
+        <ion-input
+          placeholder="AA-123-AA"
+          formControlName="licensePlate"
+          class="custom-input"
+        ></ion-input>
       </ion-item>
+      <div *ngIf="carForm.get('licensePlate')?.dirty">
+        <span *ngIf="carForm.get('licensePlate')?.errors?.['required']" class="error-message">This field is required</span>
+        <span *ngIf="carForm.get('licensePlate')?.errors?.['pattern']" class="error-message">Invalid license plate format</span>
+      </div>
+
       <ion-item class="custom-item">
         <ion-label>Front Photo</ion-label>
-        <input type="file" id="frontPhoto" formControlName="frontPhoto" class="custom-input">
+        <input
+          type="file"
+          id="frontPhoto"
+          class="custom-input"
+          (change)="onFileChange($event, 'frontPhoto')"
+        />
       </ion-item>
+      <div *ngIf="carForm.get('frontPhoto')?.dirty">
+        <span *ngIf="carForm.get('frontPhoto')?.errors?.['required']" class="error-message">This field is required</span>
+      </div>
+
       <ion-item class="custom-item">
         <ion-label>Rear Photo</ion-label>
-        <input type="file" id="rearPhoto" formControlName="rearPhoto" class="custom-input">
+        <input
+          type="file"
+          id="rearPhoto"
+          class="custom-input"
+          (change)="onFileChange($event, 'rearPhoto')"
+        />
       </ion-item>
+      <div *ngIf="carForm.get('rearPhoto')?.dirty">
+        <span *ngIf="carForm.get('rearPhoto')?.errors?.['required']" class="error-message">This field is required</span>
+      </div>
+
       <div class="button-container">
-        <ion-button type="submit" [disabled]="!carForm.valid">Submit</ion-button>
+        <ion-button size="medium" [disabled]="carForm.invalid" type="submit">
+          Create Car
+        </ion-button>
       </div>
     </form>
   </div>
-  <app-error-modal></app-error-modal>
 </ion-content>

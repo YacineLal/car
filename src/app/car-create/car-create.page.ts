@@ -27,7 +27,10 @@ export class CarCreatePage implements OnInit {
   public carForm = new FormGroup({
     brand: new FormControl('', [Validators.required]),
     model: new FormControl('', [Validators.required]),
-    licensePlate: new FormControl('', [Validators.required]),
+    licensePlate: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[A-Z]{2}-\d{3}-[A-Z]{2}$|^\d{3}-[A-Z]{3}-\d{2}$/) // French license plate pattern
+    ]),
     frontPhoto: new FormControl('', [Validators.required]),
     rearPhoto: new FormControl('', [Validators.required]),
   });
@@ -102,9 +105,20 @@ export class CarCreatePage implements OnInit {
     }
   }
 
+  public onFileChange(event: Event, controlName: string): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.carForm.get(controlName)?.setValue(input.files[0]);
+    }
+  }
+
   private showErrorModal(message: string) {
     console.log('Error message:', message); // Log the error message
-    this.errorModal.errorMessage = message;
-    this.errorModalService.showModal();
+    Swal.fire({
+      title: 'Error!',
+      text: message,
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
   }
 }
