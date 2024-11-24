@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getFirestore, collection, addDoc, getDocs, doc, setDoc, deleteDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs, doc, setDoc, deleteDoc, getDoc, query, where, QueryDocumentSnapshot, DocumentData } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import { Car } from '../../models/car.model';
 
@@ -24,11 +24,24 @@ export class CarService {
 
   async addCarToDatabase(car: Car): Promise<void> {
     try {
+      const licensePlateExists = await this.checkDuplicateLicensePlate(car.licensePlate);
+      if (licensePlateExists) {
+        throw new Error('A car with this license plate already exists');
+      }
+
       const docRef = await addDoc(collection(db, 'car'), car);
       console.log('Document written with ID: ', docRef.id);
     } catch (e) {
-      console.error('Error adding document: ', e);
+      throw e; // Propagate the error to the caller for handling
     }
+  }
+
+  // Check if a car with the same license plate exists
+  async checkDuplicateLicensePlate(licensePlate: string): Promise<boolean> {
+    const carsRef = collection(db, 'car');
+    const q = query(carsRef, where("licensePlate", "==", licensePlate));
+    const querySnapshot = await getDocs(q);
+    return !querySnapshot.empty; // If no cars exist, returns false, else returns true (duplicate found)
   }
 
   async getCarsFromDatabase(): Promise<{ id: string, data: Car }[]> {

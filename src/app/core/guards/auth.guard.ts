@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { ModalService } from '../services/modal.service';
+import { LoginModalService } from '../services/login-modal.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthenticationService,
     private router: Router,
-    private modalService: ModalService
+    private modalService: LoginModalService
   ) {}
 
   canActivate(): Observable<boolean> {

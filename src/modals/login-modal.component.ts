@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalService } from '../app/core/services/modal.service';
-import { CommonModule } from '@angular/common'; // Import CommonModule for Angular directives like *ngIf
+import { CommonModule } from '@angular/common';
+import { LoginModalService } from '../app/core/services/login-modal.service';
 
 @Component({
   selector: 'app-login-modal',
@@ -13,22 +13,22 @@ import { CommonModule } from '@angular/common'; // Import CommonModule for Angul
       </div>
     </div>
   `,
-  styleUrls: ['./login-modal-component.scss'],
+  styleUrls: ['login-modal-component.scss'],
   standalone: true,
-  imports: [CommonModule], // Add CommonModule here
+  imports: [CommonModule],
 })
 export class LoginModalComponent implements OnInit {
   isVisible = false;
 
-  constructor(private modalService: ModalService) {}
+  constructor(private loginModalService: LoginModalService) {}
 
   ngOnInit() {
-    this.modalService.visibility$.subscribe((visible) => {
+    this.loginModalService.visibility$.subscribe((visible) => {
       this.isVisible = visible;
     });
   }
 
   closeModal() {
-    this.modalService.hideModal();
+    this.loginModalService.hideModal();
   }
 }

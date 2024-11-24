@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ModalService {
+export class LoginModalService {
   private visibilitySubject = new BehaviorSubject<boolean>(false);
   visibility$ = this.visibilitySubject.asObservable();
 
