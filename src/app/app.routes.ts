@@ -22,14 +22,17 @@ export const routes: Routes = [
   },
   {
     path: 'car-list',
-    loadComponent: () => import('./car-list/car-list.page').then(m => m.CarListPage)
+    loadComponent: () => import('./car-list/car-list.page').then(m => m.CarListPage),
+    canActivate: [AuthGuard]
   },
   {
     path: 'car-create',
-    loadComponent: () => import('./car-create/car-create.page').then(m => m.CarCreatePage)
+    loadComponent: () => import('./car-create/car-create.page').then(m => m.CarCreatePage),
+    canActivate: [AuthGuard]
   },
   {
     path: 'car-detail/:id',
-    loadComponent: () => import('./car-detail/car-detail.page').then(m => m.CarDetailPage)
+    loadComponent: () => import('./car-detail/car-detail.page').then(m => m.CarDetailPage),
+    canActivate: [AuthGuard]
   },
 ];

@@ -50,10 +50,11 @@ export class LoginPage implements OnInit {
       const email = this.loginForm.get('email')?.value!;
       const password = this.loginForm.get('password')?.value!;
       this.authenticationService.signInWithEmailAndPassword(email, password)
-        .then((userAuthenticated: boolean | unknown) => {
-          if (userAuthenticated === true) {
+        .then(() => {
+          // Refresh state explicitly after login
+          this.authenticationService.checkAuthState().then(() => {
             this.router.navigate(['home']);
-          }
+          });
         }).catch((error: any) => {
         console.log(error);
       });

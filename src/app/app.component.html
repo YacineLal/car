@@ -1,3 +1,10 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>My App</ion-title>
+      <app-logout-button *ngIf="isLoggedIn()">Logout</app-logout-button>
+    </ion-toolbar>
+  </ion-header>
+  <app-login-modal></app-login-modal>
+  <router-outlet></router-outlet>
 </ion-app>

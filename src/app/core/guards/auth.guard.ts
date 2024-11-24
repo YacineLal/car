@@ -1,30 +1,38 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { AlertController } from '@ionic/angular';
+import { ModalService } from '../services/modal.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-
   constructor(
     private authService: AuthenticationService,
     private router: Router,
-    private alertController: AlertController
+    private modalService: ModalService
   ) {}
 
-  async canActivate(): Promise<boolean> {
-    if (this.authService.isLoggedIn()) {
-      const alert = await this.alertController.create({
-        header: 'Already Logged In',
-        message: 'You are already logged in.',
-        buttons: ['OK']
+  canActivate(): Observable<boolean> {
+    return new Observable<boolean>(observer => {
+      console.log('AuthGuard: Current User:', this.authService.isLoggedIn());
+
+      this.authService.checkAuthState().then(isLoggedIn => {
+        if (isLoggedIn) {
+          console.log('AuthGuard: Current User:', this.authService.isLoggedIn());
+
+          observer.next(true);
+          observer.complete();
+        } else {
+          console.log('AuthGuard: Current User:', this.authService.isLoggedIn());
+
+          this.modalService.showModal();
+          this.router.navigate(['/login']);
+          observer.next(false);
+          observer.complete();
+        }
       });
-      await alert.present();
-      this.router.navigate(['home']);
-      return false;
-    }
-    return true;
+    });
   }
 }
