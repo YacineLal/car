@@ -6,6 +6,7 @@ import { CarService } from '../core/services/car.service';
 import { ErrorModalComponent } from '../../modals/error.modal.component';
 import { Car } from '../models/car.model';
 import { ErrorModalService } from '../core/services/error-modal.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-car-create',
@@ -77,6 +78,17 @@ export class CarCreatePage implements OnInit {
         try {
           await this.carService.addCarToDatabase(car);
           console.log('Car added:', car);
+          Swal.fire({
+            title: 'Success!',
+            text: 'Car added successfully',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            position: 'top', // Position the alert below the header
+            toast: true,
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+          });
           this.carForm.reset();
         } catch (error) {
           console.error('Error adding car:', error);
