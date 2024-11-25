@@ -1,4 +1,7 @@
-<ion-content [fullscreen]="true" class="car-create-content" scroll="true">
+<ion-content [fullscreen]="true" class="car-create-content" scroll = 'true'>
+  <div class="logo-container">
+    <img src="/assets/logo.png" alt="Logo" class="logo" />
+  </div>
   <div class="card">
     <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
       <ion-item class="custom-item">
@@ -71,4 +74,5 @@
       </div>
     </form>
   </div>
+  <app-error-modal></app-error-modal>
 </ion-content>

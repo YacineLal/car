@@ -6,7 +6,6 @@ import { CarService } from '../core/services/car.service';
 import { ErrorModalComponent } from '../../modals/error.modal.component';
 import { Car } from '../models/car.model';
 import { ErrorModalService } from '../core/services/error-modal.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-car-create',
@@ -63,7 +62,7 @@ export class CarCreatePage implements OnInit {
         // Check file size limit (1MB = 1048576 bytes)
         const maxSize = 1048576;
         if (frontPhotoFile.size > maxSize || rearPhotoFile.size > maxSize) {
-          this.showErrorModal('The file size should not exceed 1MB.');
+          this.errorModalService.showModal('The file size should not exceed 1MB.');
           return;
         }
 
@@ -81,27 +80,18 @@ export class CarCreatePage implements OnInit {
         try {
           await this.carService.addCarToDatabase(car);
           console.log('Car added:', car);
-          Swal.fire({
-            title: 'Success!',
-            text: 'Car added successfully',
-            icon: 'success',
-            confirmButtonText: 'OK',
-            position: 'top', // Position the alert below the header
-            toast: true,
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true
-          });
           this.carForm.reset();
         } catch (error) {
           console.error('Error adding car:', error);
           if ((error as Error).message.includes('license plate')) {
-            this.showErrorModal('This license plate is already taken.');
+            this.errorModalService.showModal('This license plate is already taken.');
           } else {
-            this.showErrorModal('An error occurred while adding the car.');
+            this.errorModalService.showModal('An error occurred while adding the car.');
           }
         }
       }
+    } else {
+      this.errorModalService.showModal('Please fill out all required fields correctly.');
     }
   }
 
@@ -110,15 +100,5 @@ export class CarCreatePage implements OnInit {
     if (input.files && input.files.length > 0) {
       this.carForm.get(controlName)?.setValue(input.files[0]);
     }
-  }
-
-  private showErrorModal(message: string) {
-    console.log('Error message:', message); // Log the error message
-    Swal.fire({
-      title: 'Error!',
-      text: message,
-      icon: 'error',
-      confirmButtonText: 'OK'
-    });
   }
 }

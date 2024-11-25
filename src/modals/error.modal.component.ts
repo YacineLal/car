@@ -1,11 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ErrorModalService } from '../app/core/services/error-modal.service';
-
+import {ErrorModalService} from "../app/core/services/error-modal.service";
 @Component({
   selector: 'app-error-modal',
   template: `
-    <div class="modal" *ngIf="isVisible" [attr.inert]="!isVisible ? true : null">
+    <div class="modal" *ngIf="isVisible">
       <div class="modal-content">
         <h1>Error</h1>
         <p>{{ errorMessage }}</p>
@@ -13,23 +12,26 @@ import { ErrorModalService } from '../app/core/services/error-modal.service';
       </div>
     </div>
   `,
-  styleUrls: ['./login-modal-component.scss'], // Corrected path
+  styleUrls: ['login-modal-component.scss'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule]
 })
 export class ErrorModalComponent implements OnInit {
-  @Input() errorMessage: string = '';
-  isVisible = false;
+  errorMessage: string = '';
+  isVisible: boolean = false;
 
   constructor(private errorModalService: ErrorModalService) {}
 
-  ngOnInit() {
-    this.errorModalService.visibility$.subscribe((visible) => {
+  ngOnInit(): void {
+    this.errorModalService.visibility$.subscribe(visible => {
       this.isVisible = visible;
+    });
+    this.errorModalService.errorMessage$.subscribe(message => {
+      this.errorMessage = message;
     });
   }
 
-  closeModal() {
+  closeModal(): void {
     this.errorModalService.hideModal();
   }
 }
