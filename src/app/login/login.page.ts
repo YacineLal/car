@@ -55,28 +55,55 @@ export class LoginPage implements OnInit {
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')?.value!;
       const password = this.loginForm.get('password')?.value!;
+
       this.authenticationService.signInWithEmailAndPassword(email, password)
         .then(() => {
-          // Refresh state explicitly after login
-          this.authenticationService.checkAuthState().then(() => {
-            this.router.navigate(['home']);
-          });
+          console.log('Login successful');
+          this.router.navigate(['home']);
         })
         .catch((error: any) => {
-          console.error('Login error:', error);
-
-          // Handle error cases
           let errorMessage = 'An unknown error occurred. Please try again.';
-          if (error.code === 'auth/invalid-credential') {
-            errorMessage = 'The email address or password are invalid.';
-          }  else if (error.code === 'auth/network-request-failed') {
-            errorMessage = 'Network error. Please check your internet connection.';
+
+          switch (error.code) {
+            case 'auth/user-not-found':
+              errorMessage = 'No user found with this email. Please sign up.';
+              break;
+            case 'auth/wrong-password':
+              errorMessage = 'Incorrect password. Please try again.';
+              break;
+            case 'auth/invalid-email':
+              errorMessage = 'The email address is not properly formatted.';
+              break;
+            case 'auth/user-disabled':
+              errorMessage = 'This user account has been disabled. Please contact support.';
+              break;
+            case 'auth/too-many-requests':
+              errorMessage = 'Too many login attempts. Please try again later.';
+              break;
+            case 'auth/network-request-failed':
+              errorMessage = 'Network error. Please check your internet connection.';
+              break;
+            case 'auth/internal-error':
+              errorMessage = 'An internal error occurred. Please try again later.';
+              break;
+            case 'auth/missing-password':
+              errorMessage = 'Password is required. Please enter your password.';
+              break;
+            case 'auth/invalid-credential':
+              errorMessage = 'The password or email are invalid. Please try again.';
+              break;
+            case 'auth/account-exists-with-different-credential':
+              errorMessage = 'An account already exists with this email but a different sign-in method. Try another method.';
+              break;
+            default:
+              errorMessage = error.message || errorMessage;
           }
 
-          // Show the error in the modal
+          // Show the error in a modal
           this.errorModalService.showModal(errorMessage);
         });
     }
   }
+
 
 }

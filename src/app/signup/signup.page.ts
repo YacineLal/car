@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import {Router, RouterModule} from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthenticationService, IUser } from '../core/services/authentication.service';
+import { ErrorModalService } from '../core/services/error-modal.service';
+import { ErrorModalComponent } from '../../modals/error.modal.component';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +17,8 @@ import { AuthenticationService, IUser } from '../core/services/authentication.se
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    ErrorModalComponent
   ]
 })
 export class SignupPage implements OnInit {
@@ -31,7 +34,8 @@ export class SignupPage implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private errorModalService: ErrorModalService // Inject ErrorModalService
   ) {}
 
   ngOnInit() {
@@ -61,15 +65,45 @@ export class SignupPage implements OnInit {
         email: this.signupForm.get('email')?.value!,
         password: this.signupForm.get('password')?.value!
       };
+
       this.authenticationService.signUpWithEmailAndPassword(user)
-        .then((userCreated: boolean | unknown) => {
-          if (userCreated === true) {
-            console.log('User created successfully, navigating to login page');
-            this.router.navigate(['login']);
+        .then(() => {
+          console.log('User created successfully, navigating to login page');
+          this.router.navigate(['login']);
+        })
+        .catch((error: any) => {
+          let errorMessage = 'An unknown error occurred. Please try again.';
+
+          switch (error.code) {
+            case 'auth/email-already-in-use':
+              errorMessage = 'The email address is already in use by another account.';
+              break;
+            case 'auth/invalid-email':
+              errorMessage = 'The email address is not properly formatted.';
+              break;
+            case 'auth/operation-not-allowed':
+              errorMessage = 'Email/password accounts are not enabled.';
+              break;
+            case 'auth/weak-password':
+              errorMessage = 'The password is too weak. Please provide a stronger password.';
+              break;
+            case 'auth/network-request-failed':
+              errorMessage = 'Network error. Please check your internet connection.';
+              break;
+            case 'auth/internal-error':
+              errorMessage = 'An internal error occurred. Please try again later.';
+              break;
+            case 'auth/too-many-requests':
+              errorMessage = 'Too many attempts. Please try again later.';
+              break;
+            default:
+              errorMessage = error.message || errorMessage;
           }
-        }).catch((error: any) => {
-        console.log('Error during signup:', error);
-      });
+
+          // Show the error in a modal
+          this.errorModalService.showModal(errorMessage);
+        });
     }
   }
+
 }
