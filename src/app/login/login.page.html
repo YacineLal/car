@@ -26,7 +26,7 @@
           formControlName="password"
           class="custom-input"
         >
-          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          <ion-input-password-toggle slot="end"  (click)="onToggleShowPassword()"></ion-input-password-toggle>
         </ion-input>
       </ion-item>
       <div *ngIf="loginForm.get('password')?.dirty">
@@ -42,4 +42,5 @@
         <span>Don't have an account? <a [routerLink]="'/signup'">Sign up</a></span>      </div>
     </form>
   </div>
+  <app-error-modal></app-error-modal>
 </ion-content>

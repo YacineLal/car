@@ -4,6 +4,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { IonicModule } from '@ionic/angular';
 import {Router, RouterModule} from '@angular/router';
 import { AuthenticationService } from '../core/services/authentication.service';
+import { ErrorModalService } from '../core/services/error-modal.service';
+import {ErrorModalComponent} from "../../modals/error.modal.component";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,8 @@ import { AuthenticationService } from '../core/services/authentication.service';
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    ErrorModalComponent
   ]
 })
 export class LoginPage implements OnInit {
@@ -28,8 +31,10 @@ export class LoginPage implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
-  ) {}
+    private router: Router,
+  private errorModalService: ErrorModalService
+
+) {}
 
   ngOnInit() {
     // Initialization logic here
@@ -45,6 +50,7 @@ export class LoginPage implements OnInit {
     }
   }
 
+
   public onLogin(): void {
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')?.value!;
@@ -55,9 +61,22 @@ export class LoginPage implements OnInit {
           this.authenticationService.checkAuthState().then(() => {
             this.router.navigate(['home']);
           });
-        }).catch((error: any) => {
-        console.log(error);
-      });
+        })
+        .catch((error: any) => {
+          console.error('Login error:', error);
+
+          // Handle error cases
+          let errorMessage = 'An unknown error occurred. Please try again.';
+          if (error.code === 'auth/invalid-credential') {
+            errorMessage = 'The email address or password are invalid.';
+          }  else if (error.code === 'auth/network-request-failed') {
+            errorMessage = 'Network error. Please check your internet connection.';
+          }
+
+          // Show the error in the modal
+          this.errorModalService.showModal(errorMessage);
+        });
     }
   }
+
 }
