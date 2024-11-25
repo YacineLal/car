@@ -18,7 +18,7 @@
 .card {
   width: 90%;
   max-width: 550px;
-  height: auto;
+  max-height: 100vh;
   background: #000000; /* Slightly lighter black for card background */
   border-radius: 15px;
   padding: 20px;
@@ -26,10 +26,7 @@
   display: flex;
   flex-direction: column;
   position: absolute; /* Absolute positioning for centering */
-  top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
-  transform: translate(-50%, -50%); /* Offset by half of its own size */
-}
+  left: calc(50% - 275px); /* 275px is half of the max-width (550px) */}
 
 /* Logo Container */
 .logo-container {
@@ -50,8 +47,8 @@
   --border-radius: 10px;
   --padding-start: 10px;
   --padding-end: 10px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 8px;
+  margin-bottom: 8px;
   font-weight: bold;
   font-size: 18px;
   display: flex;
@@ -111,6 +108,10 @@ ion-button {
 .error-message {
   color: #ff4d4d; /* Red error text */
   font-size: 12px;
-  margin-top: -10px;
-  margin-bottom: 10px;
+  margin: 5px 0; /* Minimal vertical spacing */
+  line-height: 1.2; /* Compact line height */
+  display: block; /* Ensures consistent block-level rendering */
+  white-space: nowrap; /* Prevents wrapping; adjust if you want wrapping */
+  text-overflow: ellipsis; /* Adds ellipsis for long error messages */
+  overflow: hidden; /* Hides content exceeding width */
 }
