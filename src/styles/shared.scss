@@ -2,14 +2,14 @@
 
 //* General Styling */
 .shared-content {
-  --background: #FFF; /* Black background */
+  --background: #FFF; /* White background */
   display: flex; /* Flexbox for alignment */
   justify-content: center; /* Horizontally center */
   align-items: center; /* Vertically center */
   height: 100vh; /* Full viewport height */
   width: 100vw; /* Full viewport width */
   background-color: var(--background); /* Ensure background applies to full screen */
-  color: #000; /* White text color */
+  color: #000; /* Black text color */
   box-sizing: border-box; /* Ensures consistent sizing */
   position: relative; /* Relative positioning for centering */
 }
@@ -26,7 +26,9 @@
   display: flex;
   flex-direction: column;
   position: absolute; /* Absolute positioning for centering */
-  left: calc(50% - 275px); /* 275px is half of the max-width (550px) */}
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 /* Logo Container */
 .logo-container {
@@ -37,7 +39,8 @@
 }
 
 .logo {
-  width: 500px; /* Increase the width to make the logo bigger */
+  width: 100%;
+  max-width: 500px; /* Increase the width to make the logo bigger */
   height: auto;
   border-radius: 10px;
 }
@@ -114,4 +117,35 @@ ion-button {
   white-space: nowrap; /* Prevents wrapping; adjust if you want wrapping */
   text-overflow: ellipsis; /* Adds ellipsis for long error messages */
   overflow: hidden; /* Hides content exceeding width */
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .logo {
+    max-width: 450px;
+  }
+
+  ion-button {
+    width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .logo {
+    max-width: 400px;
+  }
+
+  ion-button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }

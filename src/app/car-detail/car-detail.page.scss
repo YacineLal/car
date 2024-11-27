@@ -1,76 +1,178 @@
-/* General Styling */
 .car-detail-content {
-  --background: #000; /* Black background */
+  --background: #FFF; /* White background */
   display: flex; /* Flexbox for alignment */
   justify-content: center; /* Horizontally center */
   align-items: center; /* Vertically center */
   height: 100vh; /* Full viewport height */
   width: 100vw; /* Full viewport width */
   background-color: var(--background); /* Ensure background applies to full screen */
-  color: #fff; /* White text color */
+  color: #000; /* Black text color */
   box-sizing: border-box; /* Ensures consistent sizing */
   position: relative; /* Relative positioning for centering */
-}
+  padding: 20px; /* Add padding for content spacing */
 
-/* Card Styling */
-.detail-container {
-  width: 90%;
-  max-width: 1200px;
-  background: #1a1a1a; /* Slightly lighter black for card background */
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  position: absolute; /* Absolute positioning for centering */
-  top: 35%; /* Center vertically */
-  left: 50%; /* Center horizontally */
-  transform: translate(-50%, -50%); /* Offset by half of its own size */
-}
+  .detail-container {
+    width: 95%;
+    max-width: 1200px; /* Increased max-width for larger card */
+    background: #000; /* Black background for container */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    position: absolute; /* Absolute positioning for centering */
+    left: 50%;
+    transform: translateX(-50%);
+    top: 15%;
+  }
 
+  .info-section {
+    width: 100%;
+    margin-bottom: 20px;
 
-/* Info and Images Section */
-.info-section, .images-section {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
+    h2 {
+      font-size: 28px; /* Increased font size */
+      font-weight: bold;
+      color: #FFF; /* White text */
+      text-align: center;
+    }
 
-/* Image Styling */
-.small-img {
-  width: 48%;
-  height: auto;
-  border-radius: 10px;
-  margin-top: 10px;
-}
+    p {
+      font-size: 20px; /* Increased font size */
+      color: #CCC; /* Light gray text */
+      text-align: center;
+    }
 
-/* Header Styling */
-ion-header {
-  background: #1a1a1a; /* Slightly lighter black for header background */
-  color: #fff; /* White text color for header */
-}
+    ion-item {
+      --background: transparent;
+      --border-radius: 10px;
+      --padding-start: 10px;
+      --padding-end: 10px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+    }
 
-/* Toolbar Styling */
-ion-toolbar {
-  --background: #1a1a1a; /* Slightly lighter black for toolbar background */
-  color: #fff; /* White text color for toolbar */
-}
+    ion-label {
+      padding: 10px; /* Add padding between the label and the input */
+      flex: 1;
+      padding-right: 10px; /* Add some space between the label and the input */
+    }
 
-/* Title Styling */
-ion-title {
-  color: #fff; /* White text color for title */
-}
+    ion-input {
+      --color: #FFF; /* White text */
+      --placeholder-color: #888; /* Gray placeholder */
+      --padding-start: 15px;
+      --padding-top: 10px;
+      --padding-bottom: 10px;
+      font-size: 14px;
+      border-radius: 10px;
+      background: #333; /* Dark gray background for input */
+      color: #FFF; /* White text color for input */
+      flex: 2;
+    }
+  }
 
-/* Button Styling */
-ion-button {
-  --background: #ffcc00; /* Yellow button */
-  --border-radius: 15px;
-  --color: #000; /* Black text */
+  .images-section {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
 
-  font-size: 16px;
-  width: 50%;
-  text-transform: uppercase;
-  font-weight: bold;
-  margin-top: 10px;
+    .small-img {
+      width: 100%; /* Full width for images */
+      max-width: 550px; /* Max width for images */
+      height: auto; /* Maintain aspect ratio */
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #FFF; /* White border */
+    }
+
+    ion-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 20px;
+
+      input[type="file"] {
+        margin-top: 10px;
+        color: #FFF; /* White text */
+      }
+    }
+  }
+
+  .buttons-section {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+    ion-button {
+      --background: #ffcc00; /* Yellow button */
+      --border-radius: 15px;
+      --color: #000; /* Black text */
+      font-size: 16px;
+      width: 45%;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .detail-container {
+      width: 100%;
+      padding: 10px;
+      top: 10%;
+    }
+
+    .info-section h2 {
+      font-size: 24px;
+    }
+
+    .info-section p {
+      font-size: 18px;
+    }
+
+    .images-section .small-img {
+      max-width: 100%;
+    }
+
+    .buttons-section ion-button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .info-section h2 {
+      font-size: 20px;
+    }
+
+    .info-section p {
+      font-size: 16px;
+    }
+
+    .images-section {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .images-section .small-img {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .buttons-section {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .buttons-section ion-button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
 }
