@@ -1,59 +1,70 @@
-/* General Styling */
 .car-list-content {
-  --background: #000; /* Black background */
+  --background: #FFF; /* Black background */
   display: flex; /* Flexbox for alignment */
   justify-content: center; /* Horizontally center */
   align-items: center; /* Vertically center */
-  height: 100vh; /* Full viewport height */
+  height: 90vh; /* Full viewport height */
   width: 100vw; /* Full viewport width */
   background-color: var(--background); /* Ensure background applies to full screen */
-  color: #fff; /* White text color */
+  color: #000; /* White text color */
   box-sizing: border-box; /* Ensures consistent sizing */
-  padding: 20px; /* Padding around the grid */
+  position: relative; /* Relative positioning for centering */
 }
 
-/* Grid Styling */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  width: 100%;
-}
 
-/* Grid Item Styling */
-.grid-item {
-  background: #1a1a1a; /* Slightly lighter black for item background */
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
-  color: #fff; /* White text color inside the grid item */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+  .grid {
+    display: flex;
+    flex-wrap: wrap; /* Enable wrapping for responsive behavior */
+    gap: 16px; /* Add spacing between grid items */
+    justify-content: center; /* Center grid items horizontally */
+    width: 100%; /* Ensure the grid takes full width */
+  }
 
-/* Image Styling */
-.car-photo {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-top: 10px;
-}
+  .grid-item {
+    background-color: #000000; /* Black background for cards */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    overflow: hidden; /* Prevent content overflow */
+    width: 400px; /* Increased width for cards */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align the card content */
+    padding: 16px; /* Inner padding for card content */
+    transition: transform 0.3s ease; /* Smooth hover effect */
+    border: 4px solid yellow; /* Dark gray border */
 
-/* Header Styling */
-ion-header {
-  background: #1a1a1a; /* Slightly lighter black for header background */
-  color: #fff; /* White text color for header */
-}
+    &:hover {
+      transform: scale(1.02); /* Slightly enlarge on hover */
+    }
 
-/* Toolbar Styling */
-ion-toolbar {
-  --background: #1a1a1a; /* Slightly lighter black for toolbar background */
-  color: #fff; /* White text color for toolbar */
-}
+    .car-info {
+      text-align: center; /* Center-align text */
+      margin-bottom: 16px;
 
-/* Title Styling */
-ion-title {
-  color: #fff; /* White text color for title */
+      h2 {
+        font-size: 20px; /* Increased font size */
+        font-weight: bold;
+        color: #ffffff; /* White text */
+      }
+
+      p {
+        font-size: 16px; /* Increased font size */
+        color: #cccccc; /* Light gray for secondary text */
+      }
+    }
+
+    .car-photos {
+      display: flex;
+      justify-content: center;
+      gap: 8px; /* Space between photos */
+
+      .car-photo {
+        width: 300px; /* Increased size for car images */
+        height: 225px;
+        object-fit: cover; /* Ensure the images are properly cropped */
+        border-radius: 4px; /* Slight rounding for images */
+        border: 1px solid #dddddd; /* Light border for separation */
+      }
+    }
+
 }

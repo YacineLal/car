@@ -18,7 +18,7 @@ import { Car } from '../models/car.model';
 @Component({
   selector: 'app-car-list',
   templateUrl: './car-list.page.html',
-  styleUrls: ['./car-list.page.scss'],
+  styleUrls: ['car-list.page.scss'],
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonList, IonItem, IonLabel, IonImg]
 })
