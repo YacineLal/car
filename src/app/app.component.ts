@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from './core/services/authentication.service';
 import { LogoutButtonComponent } from './core/services/logout-button.component';
 import { LoginModalComponent } from '../modals/login-modal.component';
-import {ErrorModalComponent} from "../modals/error.modal.component";
+import { ErrorModalComponent } from '../modals/error.modal.component';
 
 @Component({
   selector: 'app-root',
@@ -15,23 +15,23 @@ import {ErrorModalComponent} from "../modals/error.modal.component";
   imports: [
     IonicModule,
     RouterModule,
-    CommonModule, // Use CommonModule here instead of BrowserModule
+    CommonModule,
     LogoutButtonComponent,
     LoginModalComponent,
-    ErrorModalComponent, // Include ErrorModalComponent here
+    ErrorModalComponent,
   ],
 })
 export class AppComponent {
   constructor(
     private authService: AuthenticationService,
-    private modalController: ModalController // Inject the ModalController to show the error modal
+    private modalController: ModalController,
+    private router: Router
   ) {}
 
   public isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 
-  // Function to open error modal
   async showErrorModal(message: string) {
     const modal = await this.modalController.create({
       component: ErrorModalComponent,
@@ -40,5 +40,21 @@ export class AppComponent {
       }
     });
     await modal.present();
+  }
+
+  navigateToCarList() {
+    this.router.navigate(['/car-list']);
+  }
+
+  navigateToCreateCar() {
+    this.router.navigate(['/create-car']);
+  }
+
+  public onLogout(): void {
+    this.authService.logout().then(() => {
+      this.router.navigate(['/login']);
+    }).catch((error) => {
+      console.error('Logout failed', error);
+    });
   }
 }

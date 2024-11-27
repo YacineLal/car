@@ -1,8 +1,13 @@
 <ion-app>
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar class="black-navbar">
       <ion-title>My App</ion-title>
-      <app-logout-button *ngIf="isLoggedIn()">Logout</app-logout-button>
+
+      <ion-buttons slot="end">
+        <ion-button (click)="navigateToCarList()">Car List</ion-button>
+        <ion-button (click)="navigateToCreateCar()">Create a Car</ion-button>
+        <app-logout-button *ngIf="isLoggedIn()" style="margin-left: 100px;">Logout</app-logout-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
   <app-login-modal></app-login-modal>
