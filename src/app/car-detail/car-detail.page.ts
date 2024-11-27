@@ -9,17 +9,19 @@ import {
   IonToolbar,
   AlertController,
   IonButton,
-  IonItem, IonInput, IonLabel, IonImg
+  IonItem, IonInput, IonLabel, IonImg,
+  ModalController
 } from '@ionic/angular/standalone';
 import { CarService } from '../core/services/car.service';
 import { Car } from '../models/car.model';
+import { ImageModalComponent } from 'src/modals/image-modal.component';
 
 @Component({
   selector: 'app-car-detail',
   templateUrl: './car-detail.page.html',
   styleUrls: ['./car-detail.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonItem, IonInput, IonLabel, IonImg]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonItem, IonInput, IonLabel, IonImg, ImageModalComponent]
 })
 export class CarDetailPage implements OnInit {
   public car: Car | undefined;
@@ -30,7 +32,8 @@ export class CarDetailPage implements OnInit {
     private route: ActivatedRoute,
     private carService: CarService,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private modalController: ModalController,
   ) {}
 
   ngOnInit() {
@@ -117,5 +120,15 @@ export class CarDetailPage implements OnInit {
       };
       reader.readAsDataURL(input.files[0]);
     }
+  }
+
+  async openImageModal(imageUrl: string) {
+    const modal = await this.modalController.create({
+      component: ImageModalComponent,
+      componentProps: {
+        imageUrl: imageUrl
+      }
+    });
+    return await modal.present();
   }
 }

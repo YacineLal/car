@@ -10,7 +10,7 @@
     <div class="info-section">
       <h2 *ngIf="!isEditMode">{{ car?.brand }} {{ car?.model }}</h2>
       <p *ngIf="!isEditMode">License Plate: {{ car?.licensePlate }}</p>
-      <form *ngIf="isEditMode">
+      <form *ngIf="isEditMode" class="edit-mode-form">
         <ion-item>
           <ion-label position="floating">Brand</ion-label>
           <ion-input [(ngModel)]="car.brand" name="brand"></ion-input>
@@ -26,16 +26,14 @@
       </form>
     </div>
     <div class="images-section">
-      <ion-img *ngIf="!isEditMode" [src]="car?.frontPhoto" alt="Front Photo" class="small-img"></ion-img>
-      <ion-img *ngIf="!isEditMode" [src]="car?.rearPhoto" alt="Rear Photo" class="small-img"></ion-img>
+      <ion-img [src]="car.frontPhoto" alt="Front Photo" class="small-img" (click)="openImageModal(car.frontPhoto)"></ion-img>
+      <ion-img [src]="car.rearPhoto" alt="Rear Photo" class="small-img" (click)="openImageModal(car.rearPhoto)"></ion-img>
       <form *ngIf="isEditMode">
         <ion-item>
-          <ion-label position="floating">Front Photo URL</ion-label>
           <ion-img [src]="car?.frontPhoto" alt="Front Photo" class="small-img"></ion-img>
           <input type="file" (change)="onFileSelected($event, 'frontPhoto')">
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Rear Photo URL</ion-label>
           <ion-img [src]="car?.rearPhoto" alt="Rear Photo" class="small-img"></ion-img>
           <input type="file" (change)="onFileSelected($event, 'rearPhoto')">
         </ion-item>

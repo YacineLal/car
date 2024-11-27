@@ -17,6 +17,7 @@
     background: #000; /* Black background for container */
     border-radius: 15px;
     padding: 20px;
+    height: auto;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
@@ -57,21 +58,21 @@
     }
 
     ion-label {
-      padding: 10px; /* Add padding between the label and the input */
+      padding: 10px;
       flex: 1;
-      padding-right: 10px; /* Add some space between the label and the input */
+      padding-right: 20px;
     }
 
     ion-input {
-      --color: #FFF; /* White text */
-      --placeholder-color: #888; /* Gray placeholder */
+      --color: #FFF;
+      --placeholder-color: #888;
       --padding-start: 15px;
       --padding-top: 10px;
       --padding-bottom: 10px;
       font-size: 14px;
       border-radius: 10px;
-      background: #333; /* Dark gray background for input */
-      color: #FFF; /* White text color for input */
+      background: #333;
+      color: #FFF;
       flex: 2;
     }
   }
@@ -83,12 +84,12 @@
     margin-bottom: 20px;
 
     .small-img {
-      width: 100%; /* Full width for images */
-      max-width: 550px; /* Max width for images */
-      height: auto; /* Maintain aspect ratio */
+      width: 100%;
+      max-width: 550px;
+      height: auto;
       object-fit: cover;
       border-radius: 10px;
-      border: 2px solid #FFF; /* White border */
+      border: 2px solid #FFF;
     }
 
     ion-item {
@@ -100,7 +101,7 @@
 
       input[type="file"] {
         margin-top: 10px;
-        color: #FFF; /* White text */
+        color: #FFF;
       }
     }
   }
@@ -111,9 +112,9 @@
     width: 100%;
 
     ion-button {
-      --background: #ffcc00; /* Yellow button */
+      --background: #ffcc00;
       --border-radius: 15px;
-      --color: #000; /* Black text */
+      --color: #000;
       font-size: 16px;
       width: 45%;
       text-transform: uppercase;
