@@ -9,7 +9,7 @@
   height: 100vh; /* Full viewport height */
   width: 100vw; /* Full viewport width */
   background-color: var(--background); /* Ensure background applies to full screen */
-  color: #000; /* Black text color */
+  color: #fff; /* White text color */
   box-sizing: border-box; /* Ensures consistent sizing */
   position: relative; /* Relative positioning for centering */
 }
@@ -56,17 +56,18 @@
   font-size: 18px;
   display: flex;
   align-items: center;
+  color: #fff; /* White text color */
 }
 
 .custom-input {
-  --color: #000; /* Black text */
+  --color: #fff; /* White text */
   --placeholder-color: #888; /* Gray placeholder */
   --padding-start: 15px;
   --padding-top: 10px;
   --padding-bottom: 10px;
   font-size: 14px;
-  background: #fff; /* White background for input */
-  color: #000; /* Black text */
+  background: #333; /* Dark gray background for input */
+  color: #fff; /* White text */
   flex: 2;
 }
 
@@ -74,6 +75,7 @@ ion-label {
   padding: 10px; /* Add padding between the label and the input */
   flex: 1;
   padding-right: 10px; /* Add some space between the label and the input */
+  color: #fff; /* White text color */
 }
 
 ion-input {
