@@ -59,7 +59,7 @@ export class LoginPage implements OnInit {
       this.authenticationService.signInWithEmailAndPassword(email, password)
         .then(() => {
           console.log('Login successful');
-          this.router.navigate(['home']);
+          this.router.navigate(['car-list']);
         })
         .catch((error: any) => {
           let errorMessage = 'An unknown error occurred. Please try again.';

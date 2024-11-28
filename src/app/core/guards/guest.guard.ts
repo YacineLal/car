@@ -16,7 +16,7 @@ export class GuestGuard implements CanActivate {
     return new Observable<boolean>(observer => {
       this.authService.checkAuthState().then(isLoggedIn => {
         if (isLoggedIn) {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/car-list']);
           observer.next(false);
           observer.complete();
         } else {
