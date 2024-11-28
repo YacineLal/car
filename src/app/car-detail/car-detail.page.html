@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true" class="car-detail-content">
+<ion-content [fullscreen]="true" class="car-detail-content" o>
   <div class="logo-container">
     <img src="/assets/logo.png" alt="Logo" class="logo" />
   </div>
@@ -33,7 +33,6 @@
         <p>{{ car?.brand }} {{ car?.model }} - License Plate: {{ car?.licensePlate }}</p>
       </div>
 
-      <!-- Brand Field -->
       <ion-item>
         <ion-label>Brand</ion-label>
         <ion-input formControlName="brand"></ion-input>
@@ -42,7 +41,6 @@
         <p *ngIf="carForm.get('brand')?.errors?.['required']">Brand is required.</p>
       </div>
 
-      <!-- Model Field -->
       <ion-item>
         <ion-label>Model</ion-label>
         <ion-input formControlName="model"></ion-input>
@@ -51,7 +49,6 @@
         <p *ngIf="carForm.get('model')?.errors?.['required']">Model is required.</p>
       </div>
 
-      <!-- License Plate Field -->
       <ion-item>
         <ion-label >License Plate</ion-label>
         <ion-input formControlName="licensePlate"></ion-input>
@@ -61,19 +58,16 @@
         <p *ngIf="carForm.get('licensePlate')?.errors?.['pattern']">License plate format is invalid.</p>
       </div>
 
-      <!-- Front Photo Field -->
       <ion-item>
         <ion-label >Front Photo</ion-label>
         <input type="file" (change)="onFileChange($event, 'frontPhoto')" accept="image/*">
       </ion-item>
 
-      <!-- Rear Photo Field -->
       <ion-item>
         <ion-label>Rear Photo</ion-label>
         <input type="file" (change)="onFileChange($event, 'rearPhoto')" accept="image/*">
       </ion-item>
 
-      <!-- Buttons Section -->
       <div class="buttons-section">
         <ion-button (click)="confirmUpdate()">
           <ion-icon name="checkmark" style="color: white;"></ion-icon>
@@ -83,9 +77,6 @@
         </ion-button>
       </div>
     </form>
-
-
-
   </div>
 
 </ion-content>

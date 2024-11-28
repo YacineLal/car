@@ -4,8 +4,12 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {AlertController, IonicModule, ModalController} from '@ionic/angular';
 import { CarService } from '../core/services/car.service';
 import { Car } from '../models/car.model';
+import { ErrorModalComponent } from '../../modals/error.modal.component';
 import { ImageModalComponent } from 'src/modals/image-modal.component';
+import { ErrorModalService } from '../core/services/error-modal.service';
 import {CommonModule} from "@angular/common";
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-car-detail',
@@ -16,7 +20,9 @@ import {CommonModule} from "@angular/common";
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ]
+    ErrorModalComponent
+
+  ]
 })
 export class CarDetailPage implements OnInit {
   public car: Car | undefined;
@@ -29,8 +35,10 @@ export class CarDetailPage implements OnInit {
     private carService: CarService,
     private router: Router,
     private alertController: AlertController,
-    private modalController: ModalController
-  ) {
+    private modalController: ModalController,
+    private errorModalService: ErrorModalService
+
+) {
     // Initialize form group
     this.carForm = new FormGroup({
       brand: new FormControl('', [Validators.required]),
@@ -88,10 +96,41 @@ export class CarDetailPage implements OnInit {
 
         await this.carService.updateCar(this.carId, updatedCar);
         console.log('Car updated successfully');
+
+        // Show success alert
+        Swal.fire({
+          title: 'Success!',
+          text: 'Car updated successfully',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          position: 'top', // Position the alert below the header
+          toast: true,
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true
+        });
+
         this.isEditMode = false;
         this.loadCar(this.carId); // Reload updated details
       } catch (error) {
         console.error('Error updating car:', error);
+
+        // Show error modal or alert depending on error type
+        if ((error as Error).message.includes('license plate')) {
+          this.errorModalService.showModal('This license plate is already taken.');
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: 'An error occurred while updating the car.',
+            icon: 'error',
+            confirmButtonText: 'OK',
+            position: 'top',
+            toast: true,
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+          });
+        }
       }
     }
   }
