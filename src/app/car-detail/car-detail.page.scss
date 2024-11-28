@@ -1,4 +1,4 @@
-.car-detail-content, .edit-container {
+.car-detail-content {
   --background: #FFF; /* White background */
   display: flex; /* Flexbox for alignment */
   justify-content: center; /* Horizontally center */
@@ -10,6 +10,18 @@
   box-sizing: border-box; /* Ensures consistent sizing */
   position: relative; /* Relative positioning for centering */
 }
+.edit-container {
+  top: 5%;
+  --background: #FFF; /* White background */
+  display: flex; /* Flexbox for alignment */
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  height: auto; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  background-color: var(--background); /* Ensure background applies to full screen */
+  color: #fff; /* White text color */
+  box-sizing: border-box; /* Ensures consistent sizing */
+  position: relative; /* Relative positioning for centering */}
 .logo-container {
   display: flex;
   justify-content: center;
