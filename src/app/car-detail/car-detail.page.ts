@@ -10,7 +10,7 @@ import {
   AlertController,
   IonButton,
   IonItem, IonInput, IonLabel, IonImg,
-  ModalController
+  ModalController, IonIcon
 } from '@ionic/angular/standalone';
 import { CarService } from '../core/services/car.service';
 import { Car } from '../models/car.model';
@@ -21,7 +21,7 @@ import { ImageModalComponent } from 'src/modals/image-modal.component';
   templateUrl: './car-detail.page.html',
   styleUrls: ['./car-detail.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonItem, IonInput, IonLabel, IonImg, ImageModalComponent]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonItem, IonInput, IonLabel, IonImg, ImageModalComponent, IonIcon]
 })
 export class CarDetailPage implements OnInit {
   public car: Car | undefined;

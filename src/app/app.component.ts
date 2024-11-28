@@ -6,6 +6,8 @@ import { AuthenticationService } from './core/services/authentication.service';
 import { LogoutButtonComponent } from './core/services/logout-button.component';
 import { LoginModalComponent } from '../modals/login-modal.component';
 import { ErrorModalComponent } from '../modals/error.modal.component';
+import { addIcons } from 'ionicons';
+import * as icons from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +28,11 @@ export class AppComponent {
     private authService: AuthenticationService,
     private modalController: ModalController,
     private router: Router
-  ) {}
+
+  ) {
+    addIcons({ ...icons });
+
+  }
 
   public isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
@@ -47,7 +53,7 @@ export class AppComponent {
   }
 
   navigateToCreateCar() {
-    this.router.navigate(['/create-car']);
+    this.router.navigate(['/car-create']);
   }
 
   public onLogout(): void {

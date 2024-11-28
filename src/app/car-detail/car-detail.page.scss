@@ -1,30 +1,31 @@
 .car-detail-content {
-  --background: #FFF; /* White background */
-  display: flex; /* Flexbox for alignment */
-  justify-content: center; /* Horizontally center */
-  align-items: center; /* Vertically center */
-  height: 100vh; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
-  background-color: var(--background); /* Ensure background applies to full screen */
-  color: #000; /* Black text color */
-  box-sizing: border-box; /* Ensures consistent sizing */
-  position: relative; /* Relative positioning for centering */
-  padding: 20px; /* Add padding for content spacing */
+  --background: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--background);
+  color: #000;
+  box-sizing: border-box;
+  position: relative;
+  padding: 20px;
 
   .detail-container {
     width: 95%;
-    max-width: 1200px; /* Increased max-width for larger card */
-    background: #000; /* Black background for container */
+    max-width: 1200px;
+    height: 700px; /* Increased height */
+    background: #000;
     border-radius: 15px;
     padding: 20px;
-    height: auto;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
-    position: absolute; /* Absolute positioning for centering */
+    position: relative;
+    overflow: hidden;
+    top: 15%;
     left: 50%;
     transform: translateX(-50%);
-    top: 15%;
   }
 
   .info-section {
@@ -32,48 +33,16 @@
     margin-bottom: 20px;
 
     h2 {
-      font-size: 28px; /* Increased font size */
+      font-size: 28px;
       font-weight: bold;
-      color: #FFF; /* White text */
+      color: #FFF;
       text-align: center;
     }
 
     p {
-      font-size: 20px; /* Increased font size */
-      color: #CCC; /* Light gray text */
+      font-size: 20px;
+      color: #CCC;
       text-align: center;
-    }
-
-    ion-item {
-      --background: transparent;
-      --border-radius: 10px;
-      --padding-start: 10px;
-      --padding-end: 10px;
-      margin-top: 8px;
-      margin-bottom: 8px;
-      font-weight: bold;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-    }
-
-    ion-label {
-      padding: 10px;
-      flex: 1;
-      padding-right: 20px;
-    }
-
-    ion-input {
-      --color: #FFF;
-      --placeholder-color: #888;
-      --padding-start: 15px;
-      --padding-top: 10px;
-      --padding-bottom: 10px;
-      font-size: 14px;
-      border-radius: 10px;
-      background: #333;
-      color: #FFF;
-      flex: 2;
     }
   }
 
@@ -84,39 +53,28 @@
     margin-bottom: 20px;
 
     .small-img {
-      width: 100%;
-      max-width: 550px;
-      height: auto;
-      object-fit: cover;
+      width: 400px; /* Larger image width */
+      height: 300px; /* Larger image height */
+      object-fit: fill; /* Stretch images to fit */
       border-radius: 10px;
       border: 2px solid #FFF;
-    }
-
-    ion-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      margin-bottom: 20px;
-
-      input[type="file"] {
-        margin-top: 10px;
-        color: #FFF;
-      }
     }
   }
 
   .buttons-section {
     display: flex;
-    justify-content: space-around;
-    width: 100%;
+    justify-content: center; /* Align buttons close together */
+    gap: 10px; /* Small spacing between buttons */
+    margin-top: 10px;
 
     ion-button {
       --background: #ffcc00;
-      --border-radius: 15px;
+      --border-radius: 10px;
       --color: #000;
-      font-size: 16px;
-      width: 45%;
+      font-size: 14px; /* Smaller font size */
+      padding: 6px 10px; /* Compact padding */
+      width: 90px; /* Reduced button width */
+      height: 35px; /* Reduced button height */
       text-transform: uppercase;
       font-weight: bold;
     }
@@ -126,7 +84,6 @@
     .detail-container {
       width: 100%;
       padding: 10px;
-      top: 10%;
     }
 
     .info-section h2 {
@@ -138,12 +95,14 @@
     }
 
     .images-section .small-img {
-      max-width: 100%;
+      width: 300px; /* Adjusted image width for smaller screens */
+      height: 200px; /* Adjusted image height */
     }
 
     .buttons-section ion-button {
-      width: 100%;
-      margin-bottom: 10px;
+      width: 80px; /* Smaller button width */
+      height: 30px; /* Smaller button height */
+      font-size: 12px; /* Smaller font size */
     }
   }
 
@@ -162,18 +121,20 @@
     }
 
     .images-section .small-img {
-      width: 100%;
-      max-width: 300px;
+      width: 250px; /* Adjusted image size */
+      height: 150px;
     }
 
     .buttons-section {
-      flex-direction: column;
-      align-items: center;
+      flex-direction: row; /* Buttons stay in a single row */
+      gap: 8px; /* Slightly reduced spacing */
     }
 
     .buttons-section ion-button {
-      width: 100%;
-      margin-bottom: 10px;
+      width: 70px;
+      height: 30px;
+      font-size: 10px;
+      margin-bottom: 0;
     }
   }
 }
