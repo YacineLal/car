@@ -1,3 +1,10 @@
+/* src/styles/shared.scss */
+
 .black-navbar {
-  --background: #000;
+  --background: #000; /* White text color */
+}
+
+.black-navbar ion-title,
+.black-navbar ion-button {
+  color: #fff; /* Ensure buttons and title text are white */
 }
