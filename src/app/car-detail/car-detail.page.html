@@ -1,5 +1,7 @@
 <ion-content [fullscreen]="true" class="car-detail-content">
-
+  <div class="logo-container">
+    <img src="/assets/logo.png" alt="Logo" class="logo" />
+  </div>
   <!-- Detail View Container -->
   <div class="detail-container" *ngIf="!isEditMode && car">
     <div class="info-section">
@@ -16,7 +18,7 @@
       <ion-button (click)="enableEditMode()">
         <ion-icon name="create" style="color: white;"></ion-icon>
       </ion-button>
-      <ion-button color="danger" (click)="deleteCar()">
+      <ion-button style="--background: #333;" (click)="deleteCar()">
         <ion-icon name="trash" style="color: white;"></ion-icon>
       </ion-button>
     </div>
@@ -25,9 +27,15 @@
   <!-- Edit Form Container -->
   <div class="edit-container" *ngIf="isEditMode">
     <form [formGroup]="carForm" class="edit-mode-form">
+      <!-- Edit Car Title -->
+      <div class="edit-title">
+        <h2>EDIT CAR</h2>
+        <p>{{ car?.brand }} {{ car?.model }} - License Plate: {{ car?.licensePlate }}</p>
+      </div>
+
       <!-- Brand Field -->
       <ion-item>
-        <ion-label position="floating">Brand</ion-label>
+        <ion-label>Brand</ion-label>
         <ion-input formControlName="brand"></ion-input>
       </ion-item>
       <div *ngIf="carForm.get('brand')?.touched && carForm.get('brand')?.invalid" class="error-message">
@@ -36,7 +44,7 @@
 
       <!-- Model Field -->
       <ion-item>
-        <ion-label position="floating">Model</ion-label>
+        <ion-label>Model</ion-label>
         <ion-input formControlName="model"></ion-input>
       </ion-item>
       <div *ngIf="carForm.get('model')?.touched && carForm.get('model')?.invalid" class="error-message">
@@ -45,7 +53,7 @@
 
       <!-- License Plate Field -->
       <ion-item>
-        <ion-label position="floating">License Plate</ion-label>
+        <ion-label >License Plate</ion-label>
         <ion-input formControlName="licensePlate"></ion-input>
       </ion-item>
       <div *ngIf="carForm.get('licensePlate')?.touched && carForm.get('licensePlate')?.invalid" class="error-message">
@@ -55,13 +63,13 @@
 
       <!-- Front Photo Field -->
       <ion-item>
-        <ion-label position="stacked">Front Photo</ion-label>
+        <ion-label >Front Photo</ion-label>
         <input type="file" (change)="onFileChange($event, 'frontPhoto')" accept="image/*">
       </ion-item>
 
       <!-- Rear Photo Field -->
       <ion-item>
-        <ion-label position="stacked">Rear Photo</ion-label>
+        <ion-label>Rear Photo</ion-label>
         <input type="file" (change)="onFileChange($event, 'rearPhoto')" accept="image/*">
       </ion-item>
 

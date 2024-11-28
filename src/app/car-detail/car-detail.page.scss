@@ -10,9 +10,20 @@
   box-sizing: border-box; /* Ensures consistent sizing */
   position: relative; /* Relative positioning for centering */
 }
+.logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 100%;
+  max-width: 500px; /* Increase the width to make the logo bigger */
+  height: auto;
+  border-radius: 10px;
+}
 
 .detail-container {
-  width: 95%;
+  width: 100%;
   max-width: 1200px;
   height: 700px; /* Increased height */
   background: #000;
@@ -23,7 +34,7 @@
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  top: 15%;
+  top:5%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -35,7 +46,7 @@
   h2 {
     font-size: 28px;
     font-weight: bold;
-    color: #FFF;
+    color: #ffcc00;
     text-align: center;
   }
 
@@ -79,8 +90,9 @@
 }
 
 .edit-mode-form {
-  width: 95%;
-  max-width: 1200px;
+  top: 5%;
+  width: 100%;
+  max-width: 1200px; /* Increased max-width */
   height: auto;
   background: #000000; /* Slightly lighter black for card background */
   border-radius: 15px;
@@ -91,6 +103,22 @@
   position: absolute; /* Absolute positioning for centering */
   left: 50%;
   transform: translateX(-50%);
+}
+
+.edit-title {
+  text-align: center;
+  margin-bottom: 20px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffcc00;
+  }
+
+  p {
+    font-size: 18px;
+    color: #CCC;
+  }
 }
 
 .edit-mode-form ion-item {
@@ -108,39 +136,36 @@
 }
 
 .edit-mode-form ion-label {
-  padding: 10px; /* Add padding between the label and the input */
   flex: 1;
-  padding-right: 10px; /* Add some space between the label and the input */
-  color: #fff; /* White text color */
+  padding-right: 10px; /* Same spacing as the create form */
+  text-align: left; /* Align label to the left */
+  color: #fff; /* Consistent text color */
 }
 
 .edit-mode-form ion-input,
 .edit-mode-form input[type="file"] {
   --color: #fff; /* White text */
-  --placeholder-color: #888; /* Gray placeholder */
+  --placeholder-color: #888; /* Placeholder color */
   --padding-start: 15px;
   --padding-top: 10px;
   --padding-bottom: 10px;
   font-size: 14px;
-  background: #333; /* Dark gray background for input */
-  color: #fff; /* White text */
+  border-radius: 10px; /* Consistent rounding */
+  background: #333; /* Dark gray background */
+  color: #fff; /* Input text color */
   flex: 2;
 }
 
-.edit-mode-form input[type="file"] {
-  color: #fff; /* File input text color */
-  padding: 5px 0; /* Slightly reduced padding for file input */
-}
-
 .edit-mode-form ion-button {
-  --background: #007bff; /* Primary blue color for action buttons */
+  --background: #ffcc00; /* Consistent button background color */
   --color: #fff; /* White text for contrast */
-  width: 100%;
+  width: 100%; /* Full-width buttons */
   margin-top: 15px;
   border-radius: 8px;
-  font-size: 16px; /* Slightly larger button text */
+  font-size: 16px;
   font-weight: bold;
 }
+
 
 .error-message {
   color: #ff4d4d; /* Red error text */
@@ -157,6 +182,9 @@
   .detail-container {
     width: 100%;
     padding: 10px;
+  }
+  .logo {
+    max-width: 450px;
   }
 
   .info-section h2 {
@@ -187,7 +215,9 @@
   .info-section h2 {
     font-size: 20px;
   }
-
+  .logo {
+    max-width: 400px;
+  }
   .info-section p {
     font-size: 16px;
   }
