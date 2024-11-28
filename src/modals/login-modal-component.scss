@@ -11,6 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #fff; /* White text color */
 }
 
 .modal-content {
@@ -20,6 +21,7 @@
   border: 1px solid #888;
   width: 300px; /* Smaller width */
   text-align: center; /* Center the text */
+  color: #fff; /* White text color */
 }
 
 button {
@@ -28,6 +30,7 @@ button {
   padding: 10px 20px;
   cursor: pointer;
   margin-top: 20px;
+  color: #000; /* Black text color */
 }
 
 .show {
