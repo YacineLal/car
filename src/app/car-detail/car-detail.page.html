@@ -1,55 +1,83 @@
-  <ion-content [fullscreen]="true" class="car-detail-content">
+<ion-content [fullscreen]="true" class="car-detail-content">
 
+  <!-- Detail View Container -->
+  <div class="detail-container" *ngIf="!isEditMode && car">
+    <div class="info-section">
+      <h2>{{ car?.brand }} {{ car?.model }}</h2>
+      <p>License Plate: {{ car?.licensePlate }}</p>
+    </div>
 
-    <div class="detail-container" *ngIf="car">
-      <div class="info-section">
-        <!-- Detail View -->
-        <h2 *ngIf="!isEditMode">{{ car?.brand }} {{ car?.model }}</h2>
-        <p *ngIf="!isEditMode">License Plate: {{ car?.licensePlate }}</p>
+    <div class="images-section">
+      <ion-img [src]="car.frontPhoto" alt="Front Photo" class="small-img" (click)="openImageModal(car.frontPhoto)"></ion-img>
+      <ion-img [src]="car.rearPhoto" alt="Rear Photo" class="small-img" (click)="openImageModal(car.rearPhoto)"></ion-img>
+    </div>
 
-        <!-- Edit Form -->
-        <form *ngIf="isEditMode" [formGroup]="carForm" class="edit-mode-form">
-          <ion-item>
-            <ion-label position="floating">Brand</ion-label>
-            <ion-input formControlName="brand"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Model</ion-label>
-            <ion-input formControlName="model"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">License Plate</ion-label>
-            <ion-input formControlName="licensePlate"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="stacked">Front Photo</ion-label>
-            <input type="file" (change)="onFileChange($event, 'frontPhoto')" accept="image/*">
-          </ion-item>
-          <ion-item>
-            <ion-label position="stacked">Rear Photo</ion-label>
-            <input type="file" (change)="onFileChange($event, 'rearPhoto')" accept="image/*">
-          </ion-item>
-        </form>
+    <div class="buttons-section">
+      <ion-button (click)="enableEditMode()">
+        <ion-icon name="create" style="color: white;"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" (click)="deleteCar()">
+        <ion-icon name="trash" style="color: white;"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Edit Form Container -->
+  <div class="edit-container" *ngIf="isEditMode">
+    <form [formGroup]="carForm" class="edit-mode-form">
+      <!-- Brand Field -->
+      <ion-item>
+        <ion-label position="floating">Brand</ion-label>
+        <ion-input formControlName="brand"></ion-input>
+      </ion-item>
+      <div *ngIf="carForm.get('brand')?.touched && carForm.get('brand')?.invalid" class="error-message">
+        <p *ngIf="carForm.get('brand')?.errors?.['required']">Brand is required.</p>
       </div>
 
-      <div class="images-section" *ngIf="!isEditMode">
-        <ion-img [src]="car.frontPhoto" alt="Front Photo" class="small-img" (click)="openImageModal(car.frontPhoto)"></ion-img>
-        <ion-img [src]="car.rearPhoto" alt="Rear Photo" class="small-img" (click)="openImageModal(car.rearPhoto)"></ion-img>
+      <!-- Model Field -->
+      <ion-item>
+        <ion-label position="floating">Model</ion-label>
+        <ion-input formControlName="model"></ion-input>
+      </ion-item>
+      <div *ngIf="carForm.get('model')?.touched && carForm.get('model')?.invalid" class="error-message">
+        <p *ngIf="carForm.get('model')?.errors?.['required']">Model is required.</p>
       </div>
 
+      <!-- License Plate Field -->
+      <ion-item>
+        <ion-label position="floating">License Plate</ion-label>
+        <ion-input formControlName="licensePlate"></ion-input>
+      </ion-item>
+      <div *ngIf="carForm.get('licensePlate')?.touched && carForm.get('licensePlate')?.invalid" class="error-message">
+        <p *ngIf="carForm.get('licensePlate')?.errors?.['required']">License plate is required.</p>
+        <p *ngIf="carForm.get('licensePlate')?.errors?.['pattern']">License plate format is invalid.</p>
+      </div>
+
+      <!-- Front Photo Field -->
+      <ion-item>
+        <ion-label position="stacked">Front Photo</ion-label>
+        <input type="file" (change)="onFileChange($event, 'frontPhoto')" accept="image/*">
+      </ion-item>
+
+      <!-- Rear Photo Field -->
+      <ion-item>
+        <ion-label position="stacked">Rear Photo</ion-label>
+        <input type="file" (change)="onFileChange($event, 'rearPhoto')" accept="image/*">
+      </ion-item>
+
+      <!-- Buttons Section -->
       <div class="buttons-section">
-        <ion-button *ngIf="!isEditMode" (click)="enableEditMode()">
-          <ion-icon name="create" style="color: white;"></ion-icon>
-        </ion-button>
-        <ion-button *ngIf="!isEditMode" color="danger" (click)="deleteCar()">
-          <ion-icon name="trash" style="color: white;"></ion-icon>
-        </ion-button>
-        <ion-button *ngIf="isEditMode" (click)="confirmUpdate()">
+        <ion-button (click)="confirmUpdate()">
           <ion-icon name="checkmark" style="color: white;"></ion-icon>
         </ion-button>
-        <ion-button *ngIf="isEditMode" color="medium" (click)="cancelUpdate()">
+        <ion-button color="medium" (click)="cancelUpdate()">
           <ion-icon name="close" style="color: white;"></ion-icon>
         </ion-button>
       </div>
-    </div>
-  </ion-content>
+    </form>
+
+
+
+  </div>
+
+</ion-content>

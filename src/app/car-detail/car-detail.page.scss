@@ -1,140 +1,214 @@
-.car-detail-content {
-  --background: #FFF;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: var(--background);
-  color: #000;
-  box-sizing: border-box;
-  position: relative;
+.car-detail-content, .edit-container {
+  --background: #FFF; /* White background */
+  display: flex; /* Flexbox for alignment */
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  height: 100vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  background-color: var(--background); /* Ensure background applies to full screen */
+  color: #fff; /* White text color */
+  box-sizing: border-box; /* Ensures consistent sizing */
+  position: relative; /* Relative positioning for centering */
+}
+
+.detail-container {
+  width: 95%;
+  max-width: 1200px;
+  height: 700px; /* Increased height */
+  background: #000;
+  border-radius: 15px;
   padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
+.info-section {
+  width: 100%;
+  margin-bottom: 20px;
+
+  h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #FFF;
+    text-align: center;
+  }
+
+  p {
+    font-size: 20px;
+    color: #CCC;
+    text-align: center;
+  }
+}
+
+.images-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+
+  .small-img {
+    width: 400px; /* Larger image width */
+    height: 300px; /* Larger image height */
+    object-fit: fill; /* Stretch images to fit */
+    border-radius: 10px;
+    border: 2px solid #FFF;
+  }
+}
+
+.buttons-section {
+  display: flex;
+  justify-content: center; /* Align buttons close together */
+  gap: 10px; /* Small spacing between buttons */
+  margin-top: 10px;
+
+  ion-button {
+    --background: #ffcc00; /* Yellow button */
+    --border-radius: 15px;
+    --color: #000; /* Black text */
+    font-size: 16px;
+    width: 25%;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}
+
+.edit-mode-form {
+  width: 95%;
+  max-width: 1200px;
+  height: auto;
+  background: #000000; /* Slightly lighter black for card background */
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  position: absolute; /* Absolute positioning for centering */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.edit-mode-form ion-item {
+  --background: transparent;
+  --border-radius: 10px;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  color: #fff; /* White text color */
+}
+
+.edit-mode-form ion-label {
+  padding: 10px; /* Add padding between the label and the input */
+  flex: 1;
+  padding-right: 10px; /* Add some space between the label and the input */
+  color: #fff; /* White text color */
+}
+
+.edit-mode-form ion-input,
+.edit-mode-form input[type="file"] {
+  --color: #fff; /* White text */
+  --placeholder-color: #888; /* Gray placeholder */
+  --padding-start: 15px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  font-size: 14px;
+  background: #333; /* Dark gray background for input */
+  color: #fff; /* White text */
+  flex: 2;
+}
+
+.edit-mode-form input[type="file"] {
+  color: #fff; /* File input text color */
+  padding: 5px 0; /* Slightly reduced padding for file input */
+}
+
+.edit-mode-form ion-button {
+  --background: #007bff; /* Primary blue color for action buttons */
+  --color: #fff; /* White text for contrast */
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 8px;
+  font-size: 16px; /* Slightly larger button text */
+  font-weight: bold;
+}
+
+.error-message {
+  color: #ff4d4d; /* Red error text */
+  font-size: 12px;
+  margin: 5px 0; /* Minimal vertical spacing */
+  line-height: 1.2; /* Compact line height */
+  display: block; /* Ensures consistent block-level rendering */
+  white-space: nowrap; /* Prevents wrapping; adjust if you want wrapping */
+  text-overflow: ellipsis; /* Adds ellipsis for long error messages */
+  overflow: hidden; /* Hides content exceeding width */
+}
+
+@media (max-width: 768px) {
   .detail-container {
-    width: 95%;
-    max-width: 1200px;
-    height: 700px; /* Increased height */
-    background: #000;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    top: 15%;
-    left: 50%;
-    transform: translateX(-50%);
+    width: 100%;
+    padding: 10px;
   }
 
-  .info-section {
-    width: 100%;
-    margin-bottom: 20px;
-
-    h2 {
-      font-size: 28px;
-      font-weight: bold;
-      color: #FFF;
-      text-align: center;
-    }
-
-    p {
-      font-size: 20px;
-      color: #CCC;
-      text-align: center;
-    }
+  .info-section h2 {
+    font-size: 24px;
   }
 
-  .images-section {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
+  .info-section p {
+    font-size: 18px;
+  }
 
-    .small-img {
-      width: 400px; /* Larger image width */
-      height: 300px; /* Larger image height */
-      object-fit: fill; /* Stretch images to fit */
-      border-radius: 10px;
-      border: 2px solid #FFF;
-    }
+  .images-section .small-img {
+    width: 300px; /* Adjusted image width for smaller screens */
+    height: 200px; /* Adjusted image height */
   }
 
   .buttons-section {
     display: flex;
-    justify-content: center; /* Align buttons close together */
-    gap: 10px; /* Small spacing between buttons */
-    margin-top: 10px;
-
-    ion-button {
-      --background: #ffcc00;
-      --border-radius: 10px;
-      --color: #000;
-      font-size: 14px; /* Smaller font size */
-      padding: 6px 10px; /* Compact padding */
-      width: 90px; /* Reduced button width */
-      height: 35px; /* Reduced button height */
-      text-transform: uppercase;
-      font-weight: bold;
-    }
+    justify-content: center;
+    margin-top: 20px; /* Add some space above the button */
   }
 
-  @media (max-width: 768px) {
-    .detail-container {
-      width: 100%;
-      padding: 10px;
-    }
+  .buttons-section ion-button {
+    width: 50%;
+  }
+}
 
-    .info-section h2 {
-      font-size: 24px;
-    }
-
-    .info-section p {
-      font-size: 18px;
-    }
-
-    .images-section .small-img {
-      width: 300px; /* Adjusted image width for smaller screens */
-      height: 200px; /* Adjusted image height */
-    }
-
-    .buttons-section ion-button {
-      width: 80px; /* Smaller button width */
-      height: 30px; /* Smaller button height */
-      font-size: 12px; /* Smaller font size */
-    }
+@media (max-width: 480px) {
+  .info-section h2 {
+    font-size: 20px;
   }
 
-  @media (max-width: 480px) {
-    .info-section h2 {
-      font-size: 20px;
-    }
+  .info-section p {
+    font-size: 16px;
+  }
 
-    .info-section p {
-      font-size: 16px;
-    }
+  .images-section {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .images-section {
-      flex-direction: column;
-      align-items: center;
-    }
+  .images-section .small-img {
+    width: 250px; /* Adjusted image size */
+    height: 150px;
+  }
 
-    .images-section .small-img {
-      width: 250px; /* Adjusted image size */
-      height: 150px;
-    }
+  .buttons-section {
+    flex-direction: row; /* Buttons stay in a single row */
+    gap: 8px; /* Slightly reduced spacing */
+  }
 
-    .buttons-section {
-      flex-direction: row; /* Buttons stay in a single row */
-      gap: 8px; /* Slightly reduced spacing */
-    }
-
-    .buttons-section ion-button {
-      width: 70px;
-      height: 30px;
-      font-size: 10px;
-      margin-bottom: 0;
-    }
+  .buttons-section ion-button {
+    width: 100%;
+    margin-bottom: 10px;
   }
 }
