@@ -1,30 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-  AlertController,
-  IonButton,
-  IonItem, IonInput, IonLabel, IonImg,
-  ModalController, IonIcon
-} from '@ionic/angular/standalone';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {AlertController, IonicModule, ModalController} from '@ionic/angular';
 import { CarService } from '../core/services/car.service';
 import { Car } from '../models/car.model';
 import { ImageModalComponent } from 'src/modals/image-modal.component';
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-car-detail',
   templateUrl: './car-detail.page.html',
   styleUrls: ['./car-detail.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonButton, IonItem, IonInput, IonLabel, IonImg, ImageModalComponent, IonIcon]
+  imports: [CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    IonicModule,
+    ]
 })
 export class CarDetailPage implements OnInit {
   public car: Car | undefined;
+  public carForm: FormGroup;
   private carId: string | undefined;
   public isEditMode: boolean = false;
 
@@ -33,8 +29,20 @@ export class CarDetailPage implements OnInit {
     private carService: CarService,
     private router: Router,
     private alertController: AlertController,
-    private modalController: ModalController,
-  ) {}
+    private modalController: ModalController
+  ) {
+    // Initialize form group
+    this.carForm = new FormGroup({
+      brand: new FormControl('', [Validators.required]),
+      model: new FormControl('', [Validators.required]),
+      licensePlate: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[A-Z]{2}-\d{3}-[A-Z]{2}$|^\d{3}-[A-Z]{3}-\d{2}$/),
+      ]),
+      frontPhoto: new FormControl(null),
+      rearPhoto: new FormControl(null),
+    });
+  }
 
   ngOnInit() {
     const carId = this.route.snapshot.paramMap.get('id');
@@ -50,6 +58,13 @@ export class CarDetailPage implements OnInit {
     try {
       const carData = await this.carService.getCarById(carId);
       this.car = carData.data;
+
+      // Populate the form with car details
+      this.carForm.patchValue({
+        brand: this.car?.brand,
+        model: this.car?.model,
+        licensePlate: this.car?.licensePlate,
+      });
     } catch (error) {
       console.error('Error fetching car:', error);
     }
@@ -60,11 +75,21 @@ export class CarDetailPage implements OnInit {
   }
 
   public async confirmUpdate() {
-    if (this.car && this.carId) {
+    if (this.carForm.valid && this.carId) {
       try {
-        await this.carService.updateCar(this.carId, this.car);
+        const updatedCar: Car = {
+          ...this.car,
+          brand: this.carForm.value.brand || '',
+          model: this.carForm.value.model || '',
+          licensePlate: this.carForm.value.licensePlate || '',
+          frontPhoto: this.carForm.value.frontPhoto || this.car?.frontPhoto || '',
+          rearPhoto: this.carForm.value.rearPhoto || this.car?.rearPhoto || '',
+        };
+
+        await this.carService.updateCar(this.carId, updatedCar);
         console.log('Car updated successfully');
         this.isEditMode = false;
+        this.loadCar(this.carId); // Reload updated details
       } catch (error) {
         console.error('Error updating car:', error);
       }
@@ -94,9 +119,7 @@ export class CarDetailPage implements OnInit {
               try {
                 await this.carService.deleteCar(this.carId!);
                 console.log('Car deleted successfully');
-                this.router.navigateByUrl('/car-list', { skipLocationChange: true }).then(() => {
-                  this.router.navigate(['/car-list']);
-                });
+                this.router.navigate(['/car-list']);
               } catch (error) {
                 console.error('Error deleting car:', error);
               }
@@ -109,14 +132,14 @@ export class CarDetailPage implements OnInit {
     }
   }
 
-  public onFileSelected(event: Event, photoType: 'frontPhoto' | 'rearPhoto') {
+  public onFileChange(event: Event, controlName: string): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        if (this.car) {
-          this.car[photoType] = e.target.result;
-        }
+        this.carForm.patchValue({
+          [controlName]: e.target.result,
+        });
       };
       reader.readAsDataURL(input.files[0]);
     }
@@ -126,8 +149,8 @@ export class CarDetailPage implements OnInit {
     const modal = await this.modalController.create({
       component: ImageModalComponent,
       componentProps: {
-        imageUrl: imageUrl
-      }
+        imageUrl: imageUrl,
+      },
     });
     return await modal.present();
   }
