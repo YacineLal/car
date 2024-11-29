@@ -1,27 +1,28 @@
 .car-detail-content {
-  --background: #FFF; /* White background */
-  display: flex; /* Flexbox for alignment */
-  justify-content: center; /* Horizontally center */
-  align-items: center; /* Vertically center */
-  height: 100vh; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
-  background-color: var(--background); /* Ensure background applies to full screen */
-  color: #fff; /* White text color */
-  box-sizing: border-box; /* Ensures consistent sizing */
-  position: relative; /* Relative positioning for centering */
+  --background: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--background);
+  color: #fff;
+  box-sizing: border-box;
+  position: relative;
 }
 .edit-container {
   top: 5%;
-  --background: #FFF; /* White background */
-  display: flex; /* Flexbox for alignment */
-  justify-content: center; /* Horizontally center */
-  align-items: center; /* Vertically center */
-  height: auto; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
-  background-color: var(--background); /* Ensure background applies to full screen */
-  color: #fff; /* White text color */
-  box-sizing: border-box; /* Ensures consistent sizing */
-  position: relative; /* Relative positioning for centering */}
+  --background: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  background-color: var(--background);
+  color: #fff;
+  box-sizing: border-box;
+  position: relative;
+}
 .logo-container {
   display: flex;
   justify-content: center;
@@ -29,15 +30,15 @@
 
 .logo {
   width: 100%;
-  max-width: 500px; /* Increase the width to make the logo bigger */
+  max-width: 500px;
   height: auto;
   border-radius: 10px;
 }
 
 .detail-container {
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
-  height:auto; /* Increased height */
+  height: auto;
   background: #000;
   border-radius: 15px;
   padding: 20px;
@@ -46,7 +47,7 @@
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  top:5%;
+  top: 5%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -76,9 +77,9 @@
   margin-bottom: 20px;
 
   .small-img {
-    width: 400px; /* Larger image width */
-    height: 300px; /* Larger image height */
-    object-fit: fill; /* Stretch images to fit */
+    width: 400px;
+    height: 300px;
+    object-fit: fill;
     border-radius: 10px;
     border: 2px solid #FFF;
   }
@@ -86,14 +87,14 @@
 
 .buttons-section {
   display: flex;
-  justify-content: center; /* Align buttons close together */
-  gap: 100px; /* Small spacing between buttons */
+  justify-content: center;
+  gap: 100px;
   margin-top: 10px;
 
   ion-button {
-    --background: #ffcc00; /* Yellow button */
+    --background: #ffcc00;
     --border-radius: 15px;
-    --color: #000; /* Black text */
+    --color: #000;
     font-size: 16px;
     width: 25%;
     text-transform: uppercase;
@@ -103,16 +104,16 @@
 
 .edit-mode-form {
   top: 5%;
-  width: 100%;
-  max-width: 1200px; /* Increased max-width */
+  width: 90%;
+  max-width: 1200px;
   height: auto;
-  background: #000000; /* Slightly lighter black for card background */
+  background: #000000;
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  position: absolute; /* Absolute positioning for centering */
+  position: absolute;
   overflow: hidden;
   left: 50%;
   transform: translateX(-50%);
@@ -145,55 +146,54 @@
   font-size: 18px;
   display: flex;
   align-items: center;
-  color: #fff; /* White text color */
+  color: #fff;
 }
 
 .edit-mode-form ion-label {
   flex: 1;
-  padding-right: 10px; /* Same spacing as the create form */
-  text-align: left; /* Align label to the left */
-  color: #fff; /* Consistent text color */
+  padding-right: 10px;
+  text-align: left;
+  color: #fff;
 }
 
 .edit-mode-form ion-input,
 .edit-mode-form input[type="file"] {
-  --color: #fff; /* White text */
-  --placeholder-color: #888; /* Placeholder color */
+  --color: #fff;
+  --placeholder-color: #888;
   --padding-start: 15px;
   --padding-top: 10px;
   --padding-bottom: 10px;
   font-size: 14px;
-  border-radius: 10px; /* Consistent rounding */
-  background: #333; /* Dark gray background */
-  color: #fff; /* Input text color */
+  border-radius: 10px;
+  background: #333;
+  color: #fff;
   flex: 2;
 }
 
 .edit-mode-form ion-button {
-  --background: #ffcc00; /* Consistent button background color */
-  --color: #fff; /* White text for contrast */
-  width: 100%; /* Full-width buttons */
+  --background: #ffcc00;
+  --color: #fff;
+  width: 100%;
   margin-top: 15px;
   border-radius: 8px;
   font-size: 16px;
   font-weight: bold;
 }
 
-
 .error-message {
-  color: #ff4d4d; /* Red error text */
+  color: #ff4d4d;
   font-size: 12px;
-  margin: 5px 0; /* Minimal vertical spacing */
-  line-height: 1.2; /* Compact line height */
-  display: block; /* Ensures consistent block-level rendering */
-  white-space: nowrap; /* Prevents wrapping; adjust if you want wrapping */
-  text-overflow: ellipsis; /* Adds ellipsis for long error messages */
-  overflow: hidden; /* Hides content exceeding width */
+  margin: 5px 0;
+  line-height: 1.2;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
   .detail-container {
-    width: 100%;
+    width: 90%;
     padding: 10px;
   }
   .logo {
@@ -209,20 +209,19 @@
   }
 
   .images-section .small-img {
-    width: 300px; /* Adjusted image width for smaller screens */
-    height: 200px; /* Adjusted image height */
+    width: 300px;
+    height: 200px;
   }
 
   .buttons-section {
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* Add some space above the button */
+    margin-top: 20px;
   }
 
   .buttons-section ion-button {
     width: 50%;
   }
-
 }
 
 @media (max-width: 480px) {
@@ -242,13 +241,13 @@
   }
 
   .images-section .small-img {
-    width: 250px; /* Adjusted image size */
+    width: 250px;
     height: 150px;
   }
 
   .buttons-section {
-    flex-direction: row; /* Buttons stay in a single row */
-    gap: 8px; /* Slightly reduced spacing */
+    flex-direction: row;
+    gap: 8px;
   }
 
   .buttons-section ion-button {

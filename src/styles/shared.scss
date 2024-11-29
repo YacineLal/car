@@ -1,46 +1,43 @@
 /* src/styles/shared.scss */
 
-//* General Styling */
 .shared-content {
-  --background: #FFF; /* White background */
-  display: flex; /* Flexbox for alignment */
-  justify-content: center; /* Horizontally center */
-  align-items: center; /* Vertically center */
-  height: 100vh; /* Full viewport height */
-  width: 100vw; /* Full viewport width */
-  background-color: var(--background); /* Ensure background applies to full screen */
-  color: #fff; /* White text color */
-  box-sizing: border-box; /* Ensures consistent sizing */
-  position: relative; /* Relative positioning for centering */
+  --background: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--background);
+  color: #fff;
+  box-sizing: border-box;
+  position: relative;
 }
 
-/* Card Styling */
 .card {
   width: 90%;
   max-width: 550px;
   height: auto;
-  background: #000000; /* Slightly lighter black for card background */
+  background: #000000;
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  position: absolute; /* Absolute positioning for centering */
+  position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
 
-/* Logo Container */
 .logo-container {
   margin-bottom: 15px;
   display: flex;
   justify-content: center;
-  margin-top: 15px; /* Add margin-top to lower the logo */
+  margin-top: 15px;
 }
 
 .logo {
   width: 100%;
-  max-width: 500px; /* Increase the width to make the logo bigger */
+  max-width: 500px;
   height: auto;
   border-radius: 10px;
 }
@@ -56,69 +53,66 @@
   font-size: 18px;
   display: flex;
   align-items: center;
-  color: #fff; /* White text color */
+  color: #fff;
 }
 
 .custom-input {
-  --color: #fff; /* White text */
-  --placeholder-color: #888; /* Gray placeholder */
+  --color: #fff;
+  --placeholder-color: #888;
   --padding-start: 15px;
   --padding-top: 10px;
   --padding-bottom: 10px;
   font-size: 14px;
-  background: #333; /* Dark gray background for input */
-  color: #fff; /* White text */
+  background: #333;
+  color: #fff;
   flex: 2;
 }
 
 ion-label {
-  padding: 10px; /* Add padding between the label and the input */
+  padding: 10px;
   flex: 1;
-  padding-right: 10px; /* Add some space between the label and the input */
-  color: #fff; /* White text color */
+  padding-right: 10px;
+  color: #fff;
 }
 
 ion-input {
   --color: #fff;
-  --placeholder-color: #888; /* Gray placeholder */
+  --placeholder-color: #888;
   --padding-start: 15px;
   --padding-top: 10px;
   --padding-bottom: 10px;
   font-size: 14px;
   border-radius: 10px;
-  background: #333; /* Dark gray background for input */
-  color: #fff; /* White text color for input */
+  background: #333;
+  color: #fff;
   flex: 2;
 }
 
-/* Button Container */
 .button-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px; /* Add some space above the button */
+  margin-top: 20px;
 }
 
-/* Button Styling */
 ion-button {
-  --background: #ffcc00; /* Yellow button */
+  --background: #ffcc00;
   --border-radius: 15px;
-  --color: #000; /* Black text */
+  --color: #000;
   font-size: 16px;
   width: 25%;
   text-transform: uppercase;
   font-weight: bold;
 }
 
-/* Error Message */
 .error-message {
-  color: #ff4d4d; /* Red error text */
+  color: #ff4d4d;
   font-size: 12px;
-  margin: 5px 0; /* Minimal vertical spacing */
-  line-height: 1.2; /* Compact line height */
-  display: block; /* Ensures consistent block-level rendering */
-  white-space: nowrap; /* Prevents wrapping; adjust if you want wrapping */
-  text-overflow: ellipsis; /* Adds ellipsis for long error messages */
-  overflow: hidden; /* Hides content exceeding width */
+  margin: 5px 0;
+  line-height: 1.2;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
